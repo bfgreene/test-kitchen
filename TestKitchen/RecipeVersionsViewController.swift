@@ -38,11 +38,11 @@ class RecipeVersionsViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToRecipe" {
-            let recipeVC = segue.destination as? RecipeViewController
+        if segue.identifier == "segueToRecipeDetails" {
+            let recipeDetailsVC = segue.destination as? RecipeDetailsViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cell = tableView.cellForRow(at: indexPath) as? RecipeVersionCell
-                recipeVC?.title = cell?.nameLabel.text ?? "Unknown"
+                recipeDetailsVC?.title = cell?.nameLabel.text ?? "Unknown"
             }
             
         }

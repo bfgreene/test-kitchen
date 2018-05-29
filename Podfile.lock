@@ -1,0 +1,16 @@
+PODS:
+  - Backendless (4.5.0)
+
+DEPENDENCIES:
+  - Backendless
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Backendless
+
+SPEC CHECKSUMS:
+  Backendless: ff8d4bcc2ea7ac244f308c592634511dff38df87
+
+PODFILE CHECKSUM: 6c592a66519a4c640a29091bc339b397a6095b20
+
+COCOAPODS: 1.5.3
