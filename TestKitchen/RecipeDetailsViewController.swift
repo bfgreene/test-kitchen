@@ -10,7 +10,8 @@ import UIKit
 
 class RecipeDetailsViewController: UITableViewController {
 
-    var sampleIngredients = ["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "Zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
+    var sampleDish = "Towels"
+    var sampleIngredients = ["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
     var sampleDirections = ["Mix Stuff", "Mix other stuff", "preheat something", "check if it's done"]
     
     override func viewDidLoad() {
@@ -34,34 +35,55 @@ class RecipeDetailsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
         
-
-        // make index constants for cleaner ifs
-        // define higher up?
+        
+        // define higher up? switch?
         let directionsHeaderIndex = 3 + sampleIngredients.count
         let notesHeaderIndex = directionsHeaderIndex + sampleDirections.count + 1
         
         if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
+            cell.titleLabel.text = sampleDish
+            return cell
+            
         } else if indexPath.row == 1 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
+            //set image for that recipe or default "add image"
+            cell.recipeImage.image = #imageLiteral(resourceName: "sourd")
+            return cell
+            
         } else if indexPath.row == 2 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
+            cell.headerLabel.text = "Ingredients"
+            return cell
+            
         } else if indexPath.row > 2, indexPath.row < directionsHeaderIndex {
-            cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
+            cell.contentLabel.text = "∙ " + sampleIngredients[indexPath.row - 3]
+            return cell
+            
         } else if indexPath.row == directionsHeaderIndex {
-            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
+            cell.headerLabel.text = "Directions"
+            return cell
+            
         } else if  indexPath.row > directionsHeaderIndex, indexPath.row < notesHeaderIndex{
-            cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
+            cell.contentLabel.text = String(indexPath.row - directionsHeaderIndex) + ". " + sampleDirections[indexPath.row - directionsHeaderIndex - 1]
+            return cell
+            
         } else if indexPath.row == notesHeaderIndex {
-            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
+            cell.headerLabel.text = "Notes"
+            return cell
+            
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
+            cell.textContent.text = "add notes here"
+            return cell
         }
         
         
-        return cell
     }
     
 

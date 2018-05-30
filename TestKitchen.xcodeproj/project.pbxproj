@@ -10,6 +10,7 @@
 		9401CB94C81BD1E82DA87C71 /* Pods_TestKitchen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CB743C9CA25E8E63789719 /* Pods_TestKitchen.framework */; };
 		B50A0CCA20A0B74300C55233 /* RecipeVersionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */; };
 		B50A0CCC20A20F9A00C55233 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */; };
+		B52A734520BF2B2800E797B4 /* RecipeTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */; };
 		B553940820A9F32B00350816 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553940720A9F32B00350816 /* IngredientCell.swift */; };
 		B553940A20A9F34000350816 /* DirectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553940920A9F34000350816 /* DirectionCell.swift */; };
 		B5D8FD6320AF6F7700E2C5C2 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */; };
@@ -28,6 +29,7 @@
 		64CB743C9CA25E8E63789719 /* Pods_TestKitchen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestKitchen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVersionsViewController.swift; sourceTree = "<group>"; };
 		B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableCells.swift; sourceTree = "<group>"; };
 		B553940720A9F32B00350816 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		B553940920A9F34000350816 /* DirectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionCell.swift; sourceTree = "<group>"; };
 		B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				B5EF70E6209BB6F700F4F498 /* RecipesViewController.swift */,
 				B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */,
 				B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */,
+				B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */,
 				B553940720A9F32B00350816 /* IngredientCell.swift */,
 				B553940920A9F34000350816 /* DirectionCell.swift */,
 				B5EF70E4209BB19C00F4F498 /* Recipe.swift */,
@@ -210,6 +213,7 @@
 				B5EF70D0209BB0F900F4F498 /* AppDelegate.swift in Sources */,
 				B50A0CCC20A20F9A00C55233 /* MenuViewController.swift in Sources */,
 				B50A0CCA20A0B74300C55233 /* RecipeVersionsViewController.swift in Sources */,
+				B52A734520BF2B2800E797B4 /* RecipeTableCells.swift in Sources */,
 				B5EF70E5209BB19C00F4F498 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +277,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -287,13 +293,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pods/Backendless/SDK/ios/backendless/include/Backendless-Bridging-Header.h";
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -335,6 +340,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -343,7 +350,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
