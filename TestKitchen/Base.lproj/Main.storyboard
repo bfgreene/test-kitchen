@@ -331,7 +331,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="titleCell" rowHeight="60" id="eYr-lw-O0c" customClass="TitleCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="titleCell" rowHeight="60" id="eYr-lw-O0c" customClass="TitleCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eYr-lw-O0c" id="Des-Il-0Gm">
@@ -352,7 +352,7 @@
                                     <outlet property="titleLabel" destination="HSe-Hn-5tm" id="Z8N-z3-BNJ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="150" id="ks8-if-p3o" customClass="ImageCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="150" id="ks8-if-p3o" customClass="ImageCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ks8-if-p3o" id="bJd-Vs-rvN">
@@ -369,7 +369,7 @@
                                     <outlet property="recipeImage" destination="bwF-8b-xk5" id="GNN-Tt-uKG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="45" id="PTT-E4-iwU" customClass="HeaderCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="45" id="PTT-E4-iwU" customClass="HeaderCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="238" width="375" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PTT-E4-iwU" id="tIG-pr-G92">
@@ -406,7 +406,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="∙ Ingredient / 1. Direction " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-NK-noR">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="∙ Ingredient / 1. Direction " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-NK-noR">
                                             <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
@@ -446,6 +446,9 @@
                             <outlet property="delegate" destination="ndL-O6-JKm" id="hsh-Vu-nDn"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="recipeTable" destination="fiJ-m4-ADD" id="7V4-ey-aCC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMF-Ca-WSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

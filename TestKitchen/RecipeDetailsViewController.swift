@@ -14,6 +14,9 @@ class RecipeDetailsViewController: UITableViewController {
     var sampleIngredients = ["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
     var sampleDirections = ["Mix Stuff", "Mix other stuff", "preheat something", "check if it's done"]
     
+    
+    @IBOutlet var recipeTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +25,10 @@ class RecipeDetailsViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+       
+        // Uncomment if messing with dynamic row height stuff
+        // recipeTable.estimatedRowHeight = 44
+        // recipeTable.rowHeight = UITableViewAutomaticDimension
     }
 
     // MARK: - Table view data source
@@ -33,6 +40,24 @@ class RecipeDetailsViewController: UITableViewController {
         return sampleIngredients.count + sampleDirections.count + 6 //Title,Picture,Headers(3),Notes
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height = CGFloat()
+        
+        switch indexPath.row {
+        case 0:
+            height = 60
+        case 1:
+            height = 150
+        case 2:
+            height = 45
+        case 3 + sampleIngredients.count:
+            height = 45
+        default:
+            height = 44
+        }
+        
+        return height
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
