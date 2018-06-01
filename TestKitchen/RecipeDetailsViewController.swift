@@ -11,8 +11,8 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController {
 
     var sampleDish = "Towels"
-    var sampleIngredients = ["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
-    var sampleDirections = ["Mix Stuff", "Mix other stuff", "preheat something", "check if it's done"]
+    var sampleIngredients = [String]() //["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
+    var sampleDirections = [String]() //["Mix Stuff", "Mix other stuff", "preheat something", "check if it's done"]
     
     
     @IBOutlet var recipeTable: UITableView!
@@ -29,6 +29,34 @@ class RecipeDetailsViewController: UITableViewController {
         // Uncomment if messing with dynamic row height stuff
         // recipeTable.estimatedRowHeight = 44
         // recipeTable.rowHeight = UITableViewAutomaticDimension
+        
+        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
+        saveButton.isEnabled = false
+        self.navigationItem.rightBarButtonItem = saveButton
+        
+        
+        let backendless = Backendless.sharedInstance()
+        let dataStore = backendless?.data.ofTable("Recipe")
+        dataStore?.findFirst({
+            (dictionary) -> () in
+                let recipeDictionary =  dictionary as! [String : Any]
+                self.sampleDish = recipeDictionary["dish_name"] as! String
+                let dString = recipeDictionary["direction_list"] as! String
+                let iString = recipeDictionary["ingredient_list"] as! String
+                self.sampleDirections = dString.components(separatedBy: ",")
+                self.sampleIngredients = iString.components(separatedBy: ",")
+                DispatchQueue.main.async {
+                    self.recipeTable.reloadData()
+                }
+            },
+            error: {
+                (fault : Fault?) -> () in
+                print("Server reported an error: \(fault ?? Fault() )")
+        })
+        
+        
+        
+        
     }
 
     // MARK: - Table view data source
@@ -60,8 +88,6 @@ class RecipeDetailsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         // define higher up? switch?
         let directionsHeaderIndex = 3 + sampleIngredients.count
         let notesHeaderIndex = directionsHeaderIndex + sampleDirections.count + 1
@@ -112,6 +138,10 @@ class RecipeDetailsViewController: UITableViewController {
     }
     
 
+    
+    @objc func saveRecipe() {
+        
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
