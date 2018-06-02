@@ -11,8 +11,6 @@
 		B50A0CCA20A0B74300C55233 /* RecipeVersionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */; };
 		B50A0CCC20A20F9A00C55233 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */; };
 		B52A734520BF2B2800E797B4 /* RecipeTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */; };
-		B553940820A9F32B00350816 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553940720A9F32B00350816 /* IngredientCell.swift */; };
-		B553940A20A9F34000350816 /* DirectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553940920A9F34000350816 /* DirectionCell.swift */; };
 		B5D8FD6320AF6F7700E2C5C2 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */; };
 		B5EF70D0209BB0F900F4F498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */; };
 		B5EF70D5209BB0F900F4F498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EF70D3209BB0F900F4F498 /* Main.storyboard */; };
@@ -30,8 +28,6 @@
 		B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVersionsViewController.swift; sourceTree = "<group>"; };
 		B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableCells.swift; sourceTree = "<group>"; };
-		B553940720A9F32B00350816 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
-		B553940920A9F34000350816 /* DirectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionCell.swift; sourceTree = "<group>"; };
 		B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		B5EF70CC209BB0F900F4F498 /* TestKitchen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestKitchen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,17 +90,15 @@
 		B5EF70CE209BB0F900F4F498 /* TestKitchen */ = {
 			isa = PBXGroup;
 			children = (
+				B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */,
 				B5EF70D3209BB0F900F4F498 /* Main.storyboard */,
 				B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */,
 				B5EF70E6209BB6F700F4F498 /* RecipesViewController.swift */,
 				B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */,
 				B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */,
 				B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */,
-				B553940720A9F32B00350816 /* IngredientCell.swift */,
-				B553940920A9F34000350816 /* DirectionCell.swift */,
 				B5EF70E4209BB19C00F4F498 /* Recipe.swift */,
 				B5EF70D9209BB0FC00F4F498 /* Assets.xcassets */,
-				B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */,
 				B5EF70DB209BB0FC00F4F498 /* LaunchScreen.storyboard */,
 				B5EF70DE209BB0FC00F4F498 /* Info.plist */,
 				B5EF70D6209BB0F900F4F498 /* TestKitchen.xcdatamodeld */,
@@ -205,11 +199,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B553940820A9F32B00350816 /* IngredientCell.swift in Sources */,
 				B5EF70E7209BB6F700F4F498 /* RecipesViewController.swift in Sources */,
 				B5EF70D8209BB0F900F4F498 /* TestKitchen.xcdatamodeld in Sources */,
 				B5D8FD6320AF6F7700E2C5C2 /* RecipeDetailsViewController.swift in Sources */,
-				B553940A20A9F34000350816 /* DirectionCell.swift in Sources */,
 				B5EF70D0209BB0F900F4F498 /* AppDelegate.swift in Sources */,
 				B50A0CCC20A20F9A00C55233 /* MenuViewController.swift in Sources */,
 				B50A0CCA20A0B74300C55233 /* RecipeVersionsViewController.swift in Sources */,

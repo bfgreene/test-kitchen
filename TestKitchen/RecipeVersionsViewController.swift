@@ -37,6 +37,25 @@ class RecipeVersionsViewController: UITableViewController {
         return 2
     }
     
+    
+    @IBAction func addVersionButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "New Version", message: "What is the name of the recipe version?", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = "Dish 2.0"
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert!.textFields![0]
+            print("Text field: \(String(describing: textField.text))")
+            //create new entry in table with current dish_name and specified version title, segue to new recipe
+            //make option to make new version based of existing version?
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipeDetails" {
             let recipeDetailsVC = segue.destination as? RecipeDetailsViewController
