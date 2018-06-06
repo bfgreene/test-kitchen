@@ -22,6 +22,7 @@ class ImageCell: UITableViewCell {
 class HeaderCell: UITableViewCell {
     
     @IBOutlet var headerLabel: UILabel!
+    @IBOutlet var addButton: UIButton!
 }
 
 class ItemCell: UITableViewCell {
@@ -34,3 +35,8 @@ class NotesCell: UITableViewCell {
     @IBOutlet var textContent: UITextField!
 }
 
+class AddItemCell: UITableViewCell {
+    
+    @IBOutlet var textField: UITextField!
+    @IBOutlet var addButton: UIButton!
+}

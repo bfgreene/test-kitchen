@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nb8-7e-6VF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nb8-7e-6VF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -362,11 +362,15 @@
                                             <state key="normal" title="+">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="addButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="OPe-zq-qIe"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.09164717048406601" green="0.42207783460617065" blue="0.51667290925979614" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
+                                    <outlet property="addButton" destination="FB3-ve-M3o" id="sCn-85-CPR"/>
                                     <outlet property="headerLabel" destination="Kkj-8l-drQ" id="fHq-zH-Qsj"/>
                                 </connections>
                             </tableViewCell>
@@ -408,6 +412,44 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textContent" destination="Ec1-bN-iOT" id="GbT-Eu-KkT"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="371" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jmd-UY-GVL" id="61s-l3-qq2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lbP-O9-w0g">
+                                            <rect key="frame" x="16" y="0.0" width="351" height="43.5"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-Sz-jAr">
+                                                    <rect key="frame" x="0.0" y="7" width="313" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A3-Jp-brn">
+                                                    <rect key="frame" x="321" y="7" width="30" height="30"/>
+                                                    <state key="normal" title="Add"/>
+                                                    <connections>
+                                                        <action selector="addItemButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="Ebn-gs-rbA"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="lbP-O9-w0g" secondAttribute="bottom" id="Aid-hf-NFY"/>
+                                        <constraint firstItem="lbP-O9-w0g" firstAttribute="leading" secondItem="61s-l3-qq2" secondAttribute="leading" constant="16" id="cQq-3t-Zer"/>
+                                        <constraint firstItem="lbP-O9-w0g" firstAttribute="top" secondItem="61s-l3-qq2" secondAttribute="top" id="n3x-94-m29"/>
+                                        <constraint firstAttribute="trailing" secondItem="lbP-O9-w0g" secondAttribute="trailing" constant="8" id="qmB-2l-M2b"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addButton" destination="7A3-Jp-brn" id="rq4-He-uaB"/>
+                                    <outlet property="textField" destination="A8e-Sz-jAr" id="14F-mM-QKr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

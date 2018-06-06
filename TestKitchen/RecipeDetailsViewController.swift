@@ -89,8 +89,10 @@ class RecipeDetailsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // define higher up? switch?
-        let directionsHeaderIndex = 3 + sampleIngredients.count
-        let notesHeaderIndex = directionsHeaderIndex + sampleDirections.count + 1
+        let directionsHeaderIndex = 4 + sampleIngredients.count
+        let notesHeaderIndex = directionsHeaderIndex + sampleDirections.count + 2
+        let addIngredientIndex = directionsHeaderIndex - 1
+        let addDirectionIndex = notesHeaderIndex - 1
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
@@ -106,26 +108,44 @@ class RecipeDetailsViewController: UITableViewController {
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
             cell.headerLabel.text = "Ingredients"
+            cell.addButton.isHidden = true
+            cell.addButton.tag = 0 //ingredients tag
             return cell
             
-        } else if indexPath.row > 2, indexPath.row < directionsHeaderIndex {
+        } else if indexPath.row > 2, indexPath.row < addIngredientIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
             cell.contentLabel.text = "∙ " + sampleIngredients[indexPath.row - 3]
+            return cell
+            
+            
+        } else if indexPath.row == addIngredientIndex {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addItemCell", for: indexPath) as! AddItemCell
+            cell.addButton.tag = 0
+            cell.textField.text = ""
             return cell
             
         } else if indexPath.row == directionsHeaderIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
             cell.headerLabel.text = "Directions"
+            cell.addButton.isHidden = true
+            cell.addButton.tag = 1 //directions tag TODO:make constants struct here and for tag above
             return cell
             
-        } else if  indexPath.row > directionsHeaderIndex, indexPath.row < notesHeaderIndex{
+        } else if  indexPath.row > directionsHeaderIndex, indexPath.row < addDirectionIndex{
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
             cell.contentLabel.text = String(indexPath.row - directionsHeaderIndex) + ". " + sampleDirections[indexPath.row - directionsHeaderIndex - 1]
+            return cell
+            
+        } else if indexPath.row == addDirectionIndex {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addItemCell", for: indexPath) as! AddItemCell
+            cell.addButton.tag = 1 //directions tag TODO:make constants struct here and for tag above
+            cell.textField.text = ""
             return cell
             
         } else if indexPath.row == notesHeaderIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
             cell.headerLabel.text = "Notes"
+            cell.addButton.isHidden = true
             return cell
             
         } else {
@@ -140,8 +160,66 @@ class RecipeDetailsViewController: UITableViewController {
 
     
     @objc func saveRecipe() {
+        //save recipe to backendless
+        //make save button disabled
+    }
+    
+    
+    
+    
+    @IBAction func addItemButtonPressed(_ sender: Any) {
+        if let addButton = sender as? UIButton, let cell = addButton.superview?.superview?.superview as? AddItemCell {
+                print(cell.textField.text ?? "")
+            if addButton.tag == 0 {
+                sampleIngredients.append(cell.textField.text ?? "")
+                DispatchQueue.main.async {
+                    self.recipeTable.reloadData()
+                }
+            } else if addButton.tag == 1 {
+                sampleDirections.append(cell.textField.text ?? "")
+                DispatchQueue.main.async {
+                    self.recipeTable.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        //add new blank cell to appropriate section
+        //have number/bullet and blinkingcursor/keyboard to indicated typing in content right there
+        if let button = sender as? UIButton {
+            if button.tag == 0 {
+                sampleIngredients.append("")
+                DispatchQueue.main.async {
+                    self.recipeTable.reloadData()
+                }
+            } else if button.tag == 1 {
+                sampleDirections.append("")
+                DispatchQueue.main.async {
+                    self.recipeTable.reloadData()
+                }
+            }
+        }
+        
+        let alert = UIAlertController(title: "New Ingredient", message: nil , preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            
+            textField.text = "sand"
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let text = alert?.textFields![0].text
+            print(text ?? "spooksville")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        //scroll to row and make selected, in edit mode(blinking cursor
         
     }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
