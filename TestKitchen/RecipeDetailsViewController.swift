@@ -65,7 +65,7 @@ class RecipeDetailsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleIngredients.count + sampleDirections.count + 6 //Title,Picture,Headers(3),Notes
+        return sampleIngredients.count + sampleDirections.count + 8 //Title,Picture,Headers(3),Notes,addCells(2)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

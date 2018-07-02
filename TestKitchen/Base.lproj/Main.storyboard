@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -438,6 +439,9 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="7A3-Jp-brn" secondAttribute="trailing" id="xvb-eN-C8o"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -485,8 +489,165 @@
             </objects>
             <point key="canvasLocation" x="-1022" y="113"/>
         </scene>
+        <!--Sign In View Controller-->
+        <scene sceneID="Yok-wq-bM4">
+            <objects>
+                <viewController storyboardIdentifier="signInVC" id="19G-3Z-54w" customClass="SignInViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qK3-ST-BwD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-Wu-JB4">
+                                <rect key="frame" x="146" y="309.5" width="83" height="68"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJD-nA-1If">
+                                        <rect key="frame" x="0.0" y="0.0" width="83" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bgc-kU-5WA">
+                                        <rect key="frame" x="0.0" y="38" width="83" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGc-z8-hwn">
+                                <rect key="frame" x="201" y="551" width="105" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eXa-OZ-tu0" kind="show" id="Zw2-84-3Ey"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Need an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hED-m6-Tsl">
+                                <rect key="frame" x="54" y="565" width="139" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="TK-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-es-yhB">
+                                <rect key="frame" x="125" y="125" width="125" height="119"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBj-ED-ICt">
+                                <rect key="frame" x="137" y="400" width="101" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="24"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="dEU-Wu-JB4" firstAttribute="centerY" secondItem="NCT-Ss-3ZG" secondAttribute="centerY" id="3ZY-FJ-cfq"/>
+                            <constraint firstItem="dEU-Wu-JB4" firstAttribute="centerX" secondItem="NCT-Ss-3ZG" secondAttribute="centerX" id="t6g-ru-jKo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NCT-Ss-3ZG"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="WJD-nA-1If" id="Lhf-Gd-0v4"/>
+                        <outlet property="passwordField" destination="bgc-kU-5WA" id="l1b-3a-3Z7"/>
+                        <outlet property="signInButton" destination="eBj-ED-ICt" id="ryj-ND-rhp"/>
+                        <segue destination="Nb8-7e-6VF" kind="show" identifier="signInSegue" id="Sa7-tP-W6B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1uT-kw-4rz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1890.4000000000001" y="112.89355322338831"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="Dmi-tX-hr7">
+            <objects>
+                <viewController id="eXa-OZ-tu0" customClass="RegisterViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rxx-4N-Hom">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-5U-eId">
+                                <rect key="frame" x="119" y="290.5" width="136.5" height="106"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yns-h9-ZwE">
+                                        <rect key="frame" x="0.0" y="0.0" width="136.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agJ-GG-Ugs">
+                                        <rect key="frame" x="0.0" y="38" width="136.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VDK-KR-dk7">
+                                        <rect key="frame" x="0.0" y="76" width="136.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4g-m3-3X3">
+                                <rect key="frame" x="206" y="577" width="76" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInButtonPressed:" destination="eXa-OZ-tu0" eventType="touchUpInside" id="mrn-Vm-R81"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5E-fd-f2Q">
+                                <rect key="frame" x="61" y="591" width="137" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhM-hz-lgz">
+                                <rect key="frame" x="135" y="418" width="105" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="24"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButtonPressed:" destination="eXa-OZ-tu0" eventType="touchUpInside" id="b50-Dx-HHe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dFZ-5U-eId" firstAttribute="centerY" secondItem="F67-KT-gf2" secondAttribute="centerY" id="33r-e9-jYD"/>
+                            <constraint firstItem="dFZ-5U-eId" firstAttribute="centerX" secondItem="F67-KT-gf2" secondAttribute="centerX" id="JNv-A1-bLr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="F67-KT-gf2"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="yns-h9-ZwE" id="xk6-O6-rj6"/>
+                        <outlet property="passwordConfirmationField" destination="VDK-KR-dk7" id="J7c-KT-78z"/>
+                        <outlet property="passwordField" destination="agJ-GG-Ugs" id="Tc3-Tc-dT9"/>
+                        <outlet property="registerButton" destination="OhM-hz-lgz" id="MdG-eN-4Cf"/>
+                        <segue destination="Nb8-7e-6VF" kind="show" identifier="registerSegue" id="oOe-SE-4ib"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BpV-61-Yx3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1890" y="824"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="TK-Logo-1024" width="1025" height="1039"/>
         <image name="sourd" width="2323" height="2323"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oOe-SE-4ib"/>
+    </inferredMetricsTieBreakers>
 </document>
