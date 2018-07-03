@@ -16,21 +16,21 @@ class SignInViewController: UIViewController {
     @IBOutlet var signInButton: UIButton!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    @IBAction func signInButtonPressed(_ sender: Any) {
+        //check username exists
+        //check password is correct
+        
+        //segue to main screen
+       // UserDefaults.standard.set("un", forKey: "username") //maybe I don't need this with backendless b/c I can use the shared instance to find active user across the app
+        performSegue(withIdentifier: "signInSegue", sender: self)
     }
-
-   
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "signInSegue" {
+//            let destinationNC = segue.destination as! UINavigationController
+//            let targetVC = destinationNC.topViewController as! MenuViewController
+//            
+//        }
+//    }
 }

@@ -11,6 +11,7 @@ import UIKit
 class MenuViewController: UIViewController {
     
     
+    
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToRecipes", sender: sender)
     }
@@ -23,4 +24,8 @@ class MenuViewController: UIViewController {
         }
     }
 
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        //"log out" for now
+        self.dismiss(animated: true, completion: nil)
+    }
 }

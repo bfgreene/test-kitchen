@@ -230,7 +230,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="v7K-02-XtT"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Test Kitchen" id="RHA-OJ-cn1"/>
+                    <navigationItem key="navigationItem" title="Test Kitchen" id="RHA-OJ-cn1">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="lKs-XT-gQ4">
+                            <connections>
+                                <action selector="settingsButtonPressed:" destination="rSY-ev-4bR" id="93A-5R-5Zq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="WAT-I5-5tD" kind="show" identifier="segueToRecipes" id="gkR-g9-oqt"/>
                     </connections>
@@ -543,6 +549,9 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="signInButtonPressed:" destination="19G-3Z-54w" eventType="touchUpInside" id="ul6-in-QDx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
