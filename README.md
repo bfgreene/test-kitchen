@@ -1,5 +1,5 @@
 
-<p align="center"> <img src="https://github.com/bfgreene/test-kitchen/blob/master/screenshots/photo.png"></p> </br>
+<p align="center"> <img src="https://github.com/bfgreene/test-kitchen/blob/master/screenshots/TK-120.png"></p> </br>
 
 # Test Kitchen
 
