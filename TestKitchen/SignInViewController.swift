@@ -15,13 +15,14 @@ class SignInViewController: UIViewController {
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var signInButton: UIButton!
     
-    
+    /**
+     *  Check if username exists and pw is correct
+     *  Segue to main menu
+     */
     @IBAction func signInButtonPressed(_ sender: Any) {
         //check username exists
         //check password is correct
         
-        //segue to main screen
-       // UserDefaults.standard.set("un", forKey: "username") //maybe I don't need this with backendless b/c I can use the shared instance to find active user across the app
         performSegue(withIdentifier: "signInSegue", sender: self)
     }
     

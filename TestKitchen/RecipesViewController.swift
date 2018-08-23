@@ -10,7 +10,7 @@ import UIKit
 
 class RecipesViewController: UITableViewController {
     
-    //2d array for mains/sides/apps/bakery/dessert/other
+    //temporary filler data
     
     var menuIndex = 0
     let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"]
@@ -22,7 +22,6 @@ class RecipesViewController: UITableViewController {
     let other = ["Tzaziki", "Vinaigrette"]
     
     var allRecipes = [[String]]()
-    
     let backendless = Backendless.sharedInstance()
     
     override func viewDidLoad() {
@@ -41,6 +40,11 @@ class RecipesViewController: UITableViewController {
         return cell
     }
 
+    /**
+     *  Create new Recipe based on user input from alert
+     *  Save to backendless db
+     *  
+     */
     @IBAction func addRecipeButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "New Recipe", message: "What is the name of the recipe?", preferredStyle: .alert)
         

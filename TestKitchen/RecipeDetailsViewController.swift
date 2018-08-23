@@ -11,12 +11,16 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController {
 
     var sampleDish = "Towels"
-    var sampleIngredients = [String]() //["2 cups flour", "1/2 cup brown sugar", "2 tsp baking powder", "1 tsp salt", "1/2 stick butter", "zest and juice of 1 orange", "1 tsp vanilla extract", "3/4 cup shredded coconut", "1/2 cup almonds"]
-    var sampleDirections = [String]() //["Mix Stuff", "Mix other stuff", "preheat something", "check if it's done"]
+    var sampleIngredients = [String]()
+    var sampleDirections = [String]()
     
     
     @IBOutlet var recipeTable: UITableView!
     
+    /**
+     *  Add save button programmatically
+     *  Grab recipe details from db
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,6 +91,11 @@ class RecipeDetailsViewController: UITableViewController {
         return height
     }
     
+    
+    
+    /**
+     *  Determine which custom cell to deque based on position in table
+     */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // define higher up? switch?
         let directionsHeaderIndex = 4 + sampleIngredients.count
@@ -166,7 +175,6 @@ class RecipeDetailsViewController: UITableViewController {
     
     
     
-    
     @IBAction func addItemButtonPressed(_ sender: Any) {
         if let addButton = sender as? UIButton, let cell = addButton.superview?.superview?.superview as? AddItemCell {
                 print(cell.textField.text ?? "")
@@ -185,9 +193,12 @@ class RecipeDetailsViewController: UITableViewController {
     }
     
     
+    /**
+     *  !!Not using add('+') buttton currently, texfield cell instead !!!
+     *  Add new cell to appropriate section
+     *  Prompt user for contents of new cell
+     */
     @IBAction func addButtonPressed(_ sender: Any) {
-        //add new blank cell to appropriate section
-        //have number/bullet and blinkingcursor/keyboard to indicated typing in content right there
         if let button = sender as? UIButton {
             if button.tag == 0 {
                 sampleIngredients.append("")
@@ -205,7 +216,6 @@ class RecipeDetailsViewController: UITableViewController {
         let alert = UIAlertController(title: "New Ingredient", message: nil , preferredStyle: .alert)
         
         alert.addTextField { (textField) in
-            
             textField.text = "sand"
         }
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in

@@ -19,14 +19,21 @@ class RegisterViewController: UIViewController {
     @IBOutlet var registerButton: UIButton!
     let backendless = Backendless.sharedInstance()
 
-
+    /**
+    *   Check if account exists and if two pw entries match
+    *   Register if new user and segue to main menu
+    */
     @IBAction func registerButtonPressed(_ sender: Any) {
+        print(emailField.text ?? "nil")
         //check if account exists
         if emailField.text == "existingUser" {
             //alert "User with this email exists"
+            print("this email has an account")
         } else if passwordField.text != passwordConfirmationField.text {
             //alert "Passwords do not match"
+            print("pwds do not match")
         } else {
+            print("registering user")
             registerUser()
         }
         //register
@@ -34,6 +41,9 @@ class RegisterViewController: UIViewController {
         performSegue(withIdentifier: "registerSegue", sender: self)
     }
     
+    /**
+     *  Backendless provided registration code
+     */
     func registerUser() {
         let user = BackendlessUser()
         user.setProperty("email", object: emailField.text)

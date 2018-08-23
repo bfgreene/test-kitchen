@@ -10,11 +10,8 @@ import UIKit
 
 class RecipeVersionsViewController: UITableViewController {
 
+    //temporary data
     let versions = ["Original", "Versions 2", "Low Sugar", "Longer ferment"]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +35,12 @@ class RecipeVersionsViewController: UITableViewController {
     }
     
     
+    
+    /**
+     *  Create new version of recipe based on user input
+     *  Save to backendless
+     *  Segue to Recipe Detail of new version
+     */
     @IBAction func addVersionButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "New Version", message: "What is the name of the recipe version?", preferredStyle: .alert)
         
