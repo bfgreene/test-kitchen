@@ -14,18 +14,38 @@ class RecipesViewController: UITableViewController {
     
     var menuIndex = 0
     let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"]
-    let mains = ["Falafel", "Shrimp Scampi", "Pesto Pasta", "Red Curry"]
-    let sides = ["Roasted Potatoes", "Brussel Sprouts", "Three Bean Salad", "Summer Squash"]
-    let appetizers = ["Spinach Salad", "Bruschetta"]
-    let bakery = ["Sourdough", "Pita", "Cinnamon Challah", "Straberry Rhubarb Pie", "Banana Bread"]
-    let desserts = ["Fudge Brownies", "Chocolate Chip Cookies"]
-    let other = ["Tzaziki", "Vinaigrette"]
+//    let mains = ["Falafel", "Shrimp Scampi", "Pesto Pasta", "Red Curry"]
+//    let sides = ["Roasted Potatoes", "Brussel Sprouts", "Three Bean Salad", "Summer Squash"]
+//    let appetizers = ["Spinach Salad", "Bruschetta"]
+//    let bakery = ["Sourdough", "Pita", "Cinnamon Challah", "Straberry Rhubarb Pie", "Banana Bread"]
+//    let desserts = ["Fudge Brownies", "Chocolate Chip Cookies"]
+//    let other = ["Tzaziki", "Vinaigrette"]
+    
+
     
     var allRecipes = [[String]]()
-    let backendless = Backendless.sharedInstance()
+    let backendless = Backendless.sharedInstance() as Backendless
+    let currentUserId = String()
     
     override func viewDidLoad() {
-        allRecipes = [mains, sides, appetizers, bakery, desserts, other]
+        let currentUserID = backendless.userService.currentUser.email as String
+        //allRecipes = [mains, sides, appetizers, bakery, desserts, other]
+        let whereClause = "user_id = \(currentUserID)"
+        let queryBuilder = DataQueryBuilder()
+        queryBuilder!.setWhereClause(whereClause)
+        
+        let dataStore = self.backendless.data.ofTable("Recipes")
+        dataStore?.find(queryBuilder,
+                        response: {
+                            (foundRecipes) -> () in
+                            
+                            
+                            print("Result: \(String(describing: foundRecipes))")
+        },
+                        error: {
+                            (fault : Fault?) -> () in
+                            print("Server reported an error: \(fault ?? Fault()) ")
+        })
     }
     
     
@@ -43,7 +63,7 @@ class RecipesViewController: UITableViewController {
     /**
      *  Create new Recipe based on user input from alert
      *  Save to backendless db
-     *  
+     *
      */
     @IBAction func addRecipeButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "New Recipe", message: "What is the name of the recipe?", preferredStyle: .alert)
@@ -56,11 +76,12 @@ class RecipesViewController: UITableViewController {
             print("Text field: \(String(describing: textField.text))")
             //make new entry in table with given recipe name and 'Original' for default first version
             //segue to that recipe detail? Or just to versionsVC?
+            
             let recipe = ["course" : self.courseNames[self.menuIndex],
                           "dish_name": textField.text ?? "New Dish",
                           "version_name": "Original",
-                          "user_id" : "1"] as [String : Any]
-            let dataStore = self.backendless?.data.ofTable("Recipe")
+                          "user_id" : self.currentUserId] as [String : Any]
+            let dataStore = self.backendless.data.ofTable("Recipe")
             dataStore!.save(recipe,
                             response: {
                                 (recipe) -> () in
