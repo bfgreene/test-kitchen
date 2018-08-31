@@ -15,23 +15,30 @@ class SignInViewController: UIViewController {
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var signInButton: UIButton!
     
-    /**
-     *  Check if username exists and pw is correct
-     *  Segue to main menu
-     */
+    let backendless = Backendless.sharedInstance()!
+
+
     @IBAction func signInButtonPressed(_ sender: Any) {
-        //check username exists
-        //check password is correct
-        
-        performSegue(withIdentifier: "signInSegue", sender: self)
+        loginUser()
     }
     
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "signInSegue" {
-//            let destinationNC = segue.destination as! UINavigationController
-//            let targetVC = destinationNC.topViewController as! MenuViewController
-//            
-//        }
-//    }
+    /**
+     * Login user with backendless userService api
+     * Segue if login succeeds
+     * Present alert if login fails
+    */
+    func loginUser () {
+        backendless.userService.login(emailField.text, password: passwordField.text,
+        response: {
+            (loggedUser : BackendlessUser?) -> Void in
+            print("User logged in")
+            self.performSegue(withIdentifier: "signInSegue", sender: self)
+        },
+        error: {
+            (fault : Fault?) -> Void in
+            print("Server reported an error: \(String(describing: fault?.description))")
+            //alert failed login ex) wrong password
+        })
+    }
+
 }

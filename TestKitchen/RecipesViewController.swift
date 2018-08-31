@@ -23,22 +23,24 @@ class RecipesViewController: UITableViewController {
     
 
     
-    var allRecipes = [[String]]()
+    var allRecipes = [[String : Any]]()
     let backendless = Backendless.sharedInstance() as Backendless
-    let currentUserId = String()
+    var currentUserId = String()
     
     override func viewDidLoad() {
-        let currentUserID = backendless.userService.currentUser.email as String
+        currentUserId = backendless.userService.currentUser.email as String
         //allRecipes = [mains, sides, appetizers, bakery, desserts, other]
-        let whereClause = "user_id = \(currentUserID)"
+        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
         
-        let dataStore = self.backendless.data.ofTable("Recipes")
+        let dataStore = self.backendless.data.ofTable("Recipe")
         dataStore?.find(queryBuilder,
                         response: {
                             (foundRecipes) -> () in
-                            
+                            for recipe in foundRecipes as! [[String : Any]] {
+                                self.allRecipes.append(recipe)
+                            }
                             
                             print("Result: \(String(describing: foundRecipes))")
         },
@@ -50,13 +52,13 @@ class RecipesViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allRecipes[menuIndex].count
+        return allRecipes.count
     }
     
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
-        cell.nameLabel.text = allRecipes[menuIndex][indexPath.row]
+        cell.nameLabel.text = allRecipes[indexPath.row]["course_name"] as? String
         return cell
     }
 
@@ -85,7 +87,7 @@ class RecipesViewController: UITableViewController {
             dataStore!.save(recipe,
                             response: {
                                 (recipe) -> () in
-                                print("Contact saved")
+                                print("Recipe saved")
             },
                             error: {
                                 (fault : Fault?) -> () in

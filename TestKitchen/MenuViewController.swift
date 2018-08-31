@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    
+    let backendless = Backendless.sharedInstance()!
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToRecipes", sender: sender)
@@ -26,6 +26,15 @@ class MenuViewController: UIViewController {
 
     @IBAction func settingsButtonPressed(_ sender: Any) {
         //"log out" for now
-        self.dismiss(animated: true, completion: nil)
+        
+        backendless.userService.logout({
+            (result : Any?) -> Void in
+            print("User has been logged out")
+            self.dismiss(animated: true, completion: nil)
+        },
+            error: {
+                (fault : Fault?) -> Void in
+                print("Server reported an error: \(String(describing: fault?.description))")
+        })
     }
 }
