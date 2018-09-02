@@ -13,7 +13,7 @@ class RecipesViewController: UITableViewController {
     //temporary filler data
     
     var menuIndex = 0
-    let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"]
+    let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] //put in constants file or something
 //    let mains = ["Falafel", "Shrimp Scampi", "Pesto Pasta", "Red Curry"]
 //    let sides = ["Roasted Potatoes", "Brussel Sprouts", "Three Bean Salad", "Summer Squash"]
 //    let appetizers = ["Spinach Salad", "Bruschetta"]
