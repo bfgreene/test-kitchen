@@ -10,7 +10,6 @@ import UIKit
 
 class RecipesViewController: UITableViewController {
     
-    //temporary filler data
     
     var menuIndex = 0
     let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] //put in constants file or something
@@ -22,6 +21,7 @@ class RecipesViewController: UITableViewController {
 //    let other = ["Tzaziki", "Vinaigrette"]
     
 
+    @IBOutlet var recipesTableView: UITableView!
     
     var allRecipes = [[String : Any]]()
     let backendless = Backendless.sharedInstance() as Backendless
@@ -41,7 +41,7 @@ class RecipesViewController: UITableViewController {
                             for recipe in foundRecipes as! [[String : Any]] {
                                 self.allRecipes.append(recipe)
                             }
-                            
+                            self.recipesTableView.reloadData()
                             print("Result: \(String(describing: foundRecipes))")
         },
                         error: {
@@ -58,7 +58,7 @@ class RecipesViewController: UITableViewController {
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
-        cell.nameLabel.text = allRecipes[indexPath.row]["course_name"] as? String
+        cell.nameLabel.text = allRecipes[indexPath.row]["dish_name"] as? String
         return cell
     }
 

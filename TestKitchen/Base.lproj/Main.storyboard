@@ -70,6 +70,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="recipesTableView" destination="90A-mn-5Hn" id="NQZ-fU-Wxa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjr-95-hdk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
