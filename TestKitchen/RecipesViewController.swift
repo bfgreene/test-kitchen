@@ -25,7 +25,7 @@ class RecipesViewController: UITableViewController {
     
     var allRecipes = [[String : Any]]()
     let backendless = Backendless.sharedInstance() as Backendless
-    var currentUserId = String()
+    var currentUserId = String() //put userID in UserDefaults or something
     
     override func viewDidLoad() {
         currentUserId = backendless.userService.currentUser.email as String
@@ -106,6 +106,8 @@ class RecipesViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cell = tableView.cellForRow(at: indexPath) as? RecipeCell
                 versionsVC?.title = cell?.nameLabel.text ?? "Unknown"
+                versionsVC?.allVersions = allRecipes.filter { $0["dish_name"] as? String == cell?.nameLabel.text
+                }
             }
             
         }

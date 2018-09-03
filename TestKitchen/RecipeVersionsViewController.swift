@@ -10,30 +10,26 @@ import UIKit
 
 class RecipeVersionsViewController: UITableViewController {
 
-    //temporary data
-    let versions = ["Original", "Versions 2", "Low Sugar", "Longer ferment"]
+    let backendless = Backendless.sharedInstance() as Backendless
+    var allVersions = [[String:Any]]()
+    var recipeName = String()
+    
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return section == 0 ? 1 : versions.count - 1
+        return allVersions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "versionCell") as! RecipeVersionCell
-        if indexPath.section == 0 {
-            cell.nameLabel.text = versions[indexPath.row]
-        } else {
-            cell.nameLabel.text = versions[indexPath.row + 1]
-        }
-        
+        cell.nameLabel.text = allVersions[indexPath.row]["version_name"] as? String
         return cell
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
-    
     
     
     /**
@@ -74,5 +70,4 @@ class RecipeVersionsViewController: UITableViewController {
 
 class RecipeVersionCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
-    
 }
