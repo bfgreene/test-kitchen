@@ -13,24 +13,19 @@ class RecipesViewController: UITableViewController {
     
     var menuIndex = 0
     let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] //put in constants file or something
-//    let mains = ["Falafel", "Shrimp Scampi", "Pesto Pasta", "Red Curry"]
-//    let sides = ["Roasted Potatoes", "Brussel Sprouts", "Three Bean Salad", "Summer Squash"]
-//    let appetizers = ["Spinach Salad", "Bruschetta"]
-//    let bakery = ["Sourdough", "Pita", "Cinnamon Challah", "Straberry Rhubarb Pie", "Banana Bread"]
-//    let desserts = ["Fudge Brownies", "Chocolate Chip Cookies"]
-//    let other = ["Tzaziki", "Vinaigrette"]
     
 
     @IBOutlet var recipesTableView: UITableView!
     
     var allRecipes = [[String : Any]]()
+    var uniqueDishes = [String]()
     let backendless = Backendless.sharedInstance() as Backendless
     var currentUserId = String() //put userID in UserDefaults or something
     
     override func viewDidLoad() {
         currentUserId = backendless.userService.currentUser.email as String
         //allRecipes = [mains, sides, appetizers, bakery, desserts, other]
-        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
+        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"//add ordered by date_created ascending
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
         
@@ -40,6 +35,11 @@ class RecipesViewController: UITableViewController {
                             (foundRecipes) -> () in
                             for recipe in foundRecipes as! [[String : Any]] {
                                 self.allRecipes.append(recipe)
+                                let dishName = recipe["dish_name"] as? String ?? ""
+                                if !self.uniqueDishes.contains(dishName) {
+                                    self.uniqueDishes.append(dishName)
+
+                                }
                             }
                             self.recipesTableView.reloadData()
                             print("Result: \(String(describing: foundRecipes))")
@@ -52,13 +52,22 @@ class RecipesViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allRecipes.count
+       // return allRecipes.count //no should be unique dish_names.. so multiple versions don't casue repeats
+        let numDishes = uniqueDishes.count
+        if numDishes == 0 {
+            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "sourd")) //change to "no recipes! image".. make square and centered to fit all screens and that it doesn't flash before first load
+        } else {
+            recipesTableView.backgroundView = nil
+        }
+        return uniqueDishes.count
+        
     }
     
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
-        cell.nameLabel.text = allRecipes[indexPath.row]["dish_name"] as? String
+        //cell.nameLabel.text = allRecipes[indexPath.row]["dish_name"] as? String
+        cell.nameLabel.text = uniqueDishes[indexPath.row]
         return cell
     }
 
