@@ -41,13 +41,32 @@ class RecipeVersionsViewController: UITableViewController {
         let alert = UIAlertController(title: "New Version", message: "What is the name of the recipe version?", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
-            textField.text = "Dish 2.0"
+            textField.text = "Version \(self.allVersions.count + 1)"
         }
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
             print("Text field: \(String(describing: textField.text))")
             //create new entry in table with current dish_name and specified version title, segue to new recipe
+            //add it to allVersions so it shows up when
             //make option to make new version based of existing version?
+            let recipe = ["course": self.allVersions[0]["course"],
+                          "dish_name" : self.allVersions[0]["dish_name"],
+                          "user_id" : self.allVersions[0]["user_id"],
+                          "version_name" : textField.text ?? "Version \(self.allVersions.count + 1)"
+            ] //default bases off of "original"... come up with way without indexing
+            let dataStore = self.backendless.data.ofTable("Recipe")
+            dataStore!.save(recipe,
+                            response: {
+                                (recipe) -> () in
+                                print(recipe ?? "nil")
+                                //segue to new version
+            },
+                            error: {
+                                (fault : Fault?) -> () in
+                                print("Server error: \(fault ?? Fault())")
+                                //display error message
+                                
+            })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
