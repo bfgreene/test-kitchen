@@ -78,6 +78,74 @@
             </objects>
             <point key="canvasLocation" x="666.39999999999998" y="106.59670164917542"/>
         </scene>
+        <!--Settings Table View Controller-->
+        <scene sceneID="8Xz-tW-a8i">
+            <objects>
+                <tableViewController id="dIo-hU-PaW" customClass="SettingsTableViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KgF-ll-QMf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="Q2B-oA-lES">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KhW-NG-FOZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KhW-NG-FOZ" id="uA5-ZS-mQc">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Developer Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jru-n4-Fhr">
+                                                    <rect key="frame" x="16" y="12" width="157" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="PZG-oT-Uxo">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZG-oT-Uxo" id="IVT-Ar-VoT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9F-Na-QVP">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="56"/>
+                                                    <color key="backgroundColor" red="1" green="0.44880160851772732" blue="0.42864666327431955" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="19"/>
+                                                    <state key="normal" title="Log Out">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="logOutButtonPressed:" destination="dIo-hU-PaW" eventType="touchUpInside" id="2fD-uM-Ieb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="X9F-Na-QVP" secondAttribute="bottom" id="7k1-X1-Lss"/>
+                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="top" secondItem="IVT-Ar-VoT" secondAttribute="top" id="IFF-wS-o5o"/>
+                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="leading" secondItem="IVT-Ar-VoT" secondAttribute="leading" constant="16" id="Y6w-oJ-1QT"/>
+                                                <constraint firstAttribute="trailing" secondItem="X9F-Na-QVP" secondAttribute="trailing" constant="16" id="YSS-7P-ueh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="dIo-hU-PaW" id="n54-G4-H5R"/>
+                            <outlet property="delegate" destination="dIo-hU-PaW" id="7cc-BG-lrc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eoH-Sz-qa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-148" y="-644.52773613193403"/>
+        </scene>
         <!--Menu-->
         <scene sceneID="oO5-cI-r1E">
             <objects>
@@ -236,7 +304,7 @@
                     <navigationItem key="navigationItem" title="Test Kitchen" id="RHA-OJ-cn1">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="lKs-XT-gQ4">
                             <connections>
-                                <action selector="settingsButtonPressed:" destination="rSY-ev-4bR" id="93A-5R-5Zq"/>
+                                <segue destination="dIo-hU-PaW" kind="show" id="0dl-Ir-dQF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -478,7 +546,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMF-Ca-WSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2317.5999999999999" y="106.59670164917542"/>
+            <point key="canvasLocation" x="2170" y="113"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MS6-Hq-WRr">

@@ -23,18 +23,4 @@ class MenuViewController: UIViewController {
             recipesVC.menuIndex = button.tag
         }
     }
-
-    @IBAction func settingsButtonPressed(_ sender: Any) {
-        //"log out" for now
-        
-        backendless.userService.logout({
-            (result : Any?) -> Void in
-            print("User has been logged out")
-            self.dismiss(animated: true, completion: nil)
-        },
-            error: {
-                (fault : Fault?) -> Void in
-                print("Server reported an error: \(String(describing: fault?.description))")
-        })
-    }
 }
