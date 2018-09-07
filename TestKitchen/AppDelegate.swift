@@ -24,9 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         backendless?.initApp(APP_ID, apiKey:API_KEY)
-
-        
-        
         //here check User Defaults to see if a user is signed in, if not push sign in vc (default is their recipes)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let signInVC = storyboard.instantiateViewController(withIdentifier: "signInVC") as? SignInViewController {

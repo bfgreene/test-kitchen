@@ -28,6 +28,7 @@ class RecipesViewController: UITableViewController {
         let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"//add ordered by date_created ascending
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
+        queryBuilder!.setSortBy(["created"])
         
         let dataStore = self.backendless.data.ofTable("Recipe")
         dataStore?.find(queryBuilder,
@@ -38,7 +39,6 @@ class RecipesViewController: UITableViewController {
                                 let dishName = recipe["dish_name"] as? String ?? ""
                                 if !self.uniqueDishes.contains(dishName) {
                                     self.uniqueDishes.append(dishName)
-
                                 }
                             }
                             self.recipesTableView.reloadData()
