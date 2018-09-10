@@ -51,7 +51,6 @@ class RecipesViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return allRecipes.count //no should be unique dish_names.. so multiple versions don't casue repeats
         let numDishes = uniqueDishes.count
         if numDishes == 0 {
             recipesTableView.backgroundView = UIImageView(image: UIImage(named: "sourd")) //change to "no recipes! image".. make square and centered to fit all screens and that it doesn't flash before first load
@@ -65,7 +64,6 @@ class RecipesViewController: UITableViewController {
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
-        //cell.nameLabel.text = allRecipes[indexPath.row]["dish_name"] as? String
         cell.nameLabel.text = uniqueDishes[indexPath.row]
         return cell
     }
@@ -78,9 +76,7 @@ class RecipesViewController: UITableViewController {
     @IBAction func addRecipeButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "New Recipe", message: "What is the name of the recipe?", preferredStyle: .alert)
         
-        alert.addTextField { (textField) in
-            textField.text = "Delish Dish"
-        }
+        alert.addTextField()
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
             print("Text field: \(String(describing: textField.text))")

@@ -160,7 +160,6 @@ class RecipeDetailsViewController: UITableViewController {
         //make save button disabled
         let dataStore = self.backendless?.data.ofTable("Recipe")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
-
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         //recipe["notes"] = notes
         //recipe["image_path] = someImagePath
