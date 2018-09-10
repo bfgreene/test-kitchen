@@ -10,9 +10,6 @@ import UIKit
 
 class RecipeDetailsViewController: UITableViewController {
 
-    var sampleDish = "Towels"
-    var sampleIngredients = [String]()
-    var sampleDirections = [String]()
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
     /*
      Ok so normal: Mains->Original->RecipeDeets .. great passing along same recipe
@@ -78,7 +75,7 @@ class RecipeDetailsViewController: UITableViewController {
             height = 150
         case 2:
             height = 45
-        case 3 + sampleIngredients.count:
+        case 3 + ingredients.count:
             height = 45
         default:
             height = 44
@@ -94,8 +91,8 @@ class RecipeDetailsViewController: UITableViewController {
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // define higher up? switch?
-        let directionsHeaderIndex = 4 + sampleIngredients.count
-        let notesHeaderIndex = directionsHeaderIndex + sampleDirections.count + 2
+        let directionsHeaderIndex = 4 + ingredients.count
+        let notesHeaderIndex = directionsHeaderIndex + directions.count + 2
         let addIngredientIndex = directionsHeaderIndex - 1
         let addDirectionIndex = notesHeaderIndex - 1
         
@@ -160,14 +157,14 @@ class RecipeDetailsViewController: UITableViewController {
 
     
     @objc func saveRecipe() {
-        print("save button pressed")
-        //save recipe to backendless
         //make save button disabled
         let dataStore = self.backendless?.data.ofTable("Recipe")
-        recipe["ingredient_list"] = ingredients
-        recipe["direction_list"] = directions
+        recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
+
+        recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         //recipe["notes"] = notes
         //recipe["image_path] = someImagePath
+        
         dataStore?.save(recipe,
                         response: {
                             (updatedRecipe) -> () in
@@ -180,14 +177,13 @@ class RecipeDetailsViewController: UITableViewController {
                             print("Server reported an error: \(String(describing: fault))")
                             //make alert of error
         })
+        
     }
     
     
     
     @IBAction func addItemButtonPressed(_ sender: Any) {
-        print("add item button pressed")
         if let addButton = sender as? UIButton, let cell = addButton.superview?.superview?.superview as? AddItemCell {
-                print(cell.textField.text ?? "")
             if addButton.tag == 0 {
                 ingredients.append(cell.textField.text ?? "")
                 DispatchQueue.main.async {

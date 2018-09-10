@@ -439,7 +439,7 @@
                                     <outlet property="headerLabel" destination="Kkj-8l-drQ" id="fHq-zH-Qsj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" id="ckk-KW-eH1" customClass="ItemCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="itemCell" id="ckk-KW-eH1" customClass="ItemCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="283" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckk-KW-eH1" id="v9l-xq-RQW">
@@ -459,7 +459,7 @@
                                     <outlet property="contentLabel" destination="npQ-NK-noR" id="kcX-UC-XQ3"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesCell" id="ihc-78-tgs" customClass="NotesCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="notesCell" id="ihc-78-tgs" customClass="NotesCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="327" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ihc-78-tgs" id="5R7-Cu-zMJ">
@@ -479,7 +479,7 @@
                                     <outlet property="textContent" destination="Ec1-bN-iOT" id="GbT-Eu-KkT"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="371" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jmd-UY-GVL" id="61s-l3-qq2">

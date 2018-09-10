@@ -42,7 +42,6 @@ class RecipesViewController: UITableViewController {
                                 }
                             }
                             self.recipesTableView.reloadData()
-                            print("Result: \(String(describing: foundRecipes))")
         },
                         error: {
                             (fault : Fault?) -> () in
