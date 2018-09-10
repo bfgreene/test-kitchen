@@ -80,6 +80,7 @@ class RecipeVersionsViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cell = tableView.cellForRow(at: indexPath) as? RecipeVersionCell
                 recipeDetailsVC?.title = cell?.nameLabel.text ?? "Unknown"
+                recipeDetailsVC?.recipe = allVersions[indexPath.row]                
             }
             
         }

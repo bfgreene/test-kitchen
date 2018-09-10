@@ -13,7 +13,22 @@ class RecipeDetailsViewController: UITableViewController {
     var sampleDish = "Towels"
     var sampleIngredients = [String]()
     var sampleDirections = [String]()
+    var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
+    /*
+     Ok so normal: Mains->Original->RecipeDeets .. great passing along same recipe
+            save recipe.. got to versions - need it to reload from backend
+                -could have a flag to reload, not necessarily do it, only if change is made
+                -or could just load every time
+                -or send update recipe backward with unwind
+                -no need to reload dishes menu ever right? if I allow having a dish with no versions(Which seems ok).. so I can only allow dish deletion from that menu
+ 
+    */
+    var recipe = [String : Any]()
+    var ingredients = [String]()
+    var directions = [String]()
+    var notes = String() //create method where when notes section is changed, it is set to notes var(either on save or on touch to different section
     
+    let backendless = Backendless.sharedInstance()
     
     @IBOutlet var recipeTable: UITableView!
     
@@ -24,10 +39,14 @@ class RecipeDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
+        directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        //maybe use to reorder cells? always swipe to delete though and add from bottom.. always allow reordering?
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
        
         // Uncomment if messing with dynamic row height stuff
@@ -35,31 +54,8 @@ class RecipeDetailsViewController: UITableViewController {
         // recipeTable.rowHeight = UITableViewAutomaticDimension
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
-        saveButton.isEnabled = false
+        saveButton.isEnabled = true
         self.navigationItem.rightBarButtonItem = saveButton
-        
-        
-        let backendless = Backendless.sharedInstance()
-        let dataStore = backendless?.data.ofTable("Recipe")
-        dataStore?.findFirst({
-            (dictionary) -> () in
-                let recipeDictionary =  dictionary as! [String : Any]
-                self.sampleDish = recipeDictionary["dish_name"] as! String
-                let dString = recipeDictionary["direction_list"] as! String
-                let iString = recipeDictionary["ingredient_list"] as! String
-                self.sampleDirections = dString.components(separatedBy: ",")
-                self.sampleIngredients = iString.components(separatedBy: ",")
-                DispatchQueue.main.async {
-                    self.recipeTable.reloadData()
-                }
-            },
-            error: {
-                (fault : Fault?) -> () in
-                print("Server reported an error: \(fault ?? Fault() )")
-        })
-        
-        
-        
         
     }
 
@@ -69,7 +65,7 @@ class RecipeDetailsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleIngredients.count + sampleDirections.count + 8 //Title,Picture,Headers(3),Notes,addCells(2)
+        return ingredients.count + directions.count + 8 //Title,Picture,Headers(3),Notes,addCells(2)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,7 +101,7 @@ class RecipeDetailsViewController: UITableViewController {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
-            cell.titleLabel.text = sampleDish
+            cell.titleLabel.text = recipe["dish_name"] as? String
             return cell
             
         } else if indexPath.row == 1 {
@@ -117,13 +113,11 @@ class RecipeDetailsViewController: UITableViewController {
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
             cell.headerLabel.text = "Ingredients"
-            cell.addButton.isHidden = true
-            cell.addButton.tag = 0 //ingredients tag
             return cell
             
         } else if indexPath.row > 2, indexPath.row < addIngredientIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-            cell.contentLabel.text = "∙ " + sampleIngredients[indexPath.row - 3]
+            cell.contentLabel.text = "∙ " + ingredients[indexPath.row - 3]
             return cell
             
             
@@ -136,13 +130,11 @@ class RecipeDetailsViewController: UITableViewController {
         } else if indexPath.row == directionsHeaderIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
             cell.headerLabel.text = "Directions"
-            cell.addButton.isHidden = true
-            cell.addButton.tag = 1 //directions tag TODO:make constants struct here and for tag above
             return cell
             
         } else if  indexPath.row > directionsHeaderIndex, indexPath.row < addDirectionIndex{
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-            cell.contentLabel.text = String(indexPath.row - directionsHeaderIndex) + ". " + sampleDirections[indexPath.row - directionsHeaderIndex - 1]
+            cell.contentLabel.text = String(indexPath.row - directionsHeaderIndex) + ". " + directions[indexPath.row - directionsHeaderIndex - 1]
             return cell
             
         } else if indexPath.row == addDirectionIndex {
@@ -153,13 +145,12 @@ class RecipeDetailsViewController: UITableViewController {
             
         } else if indexPath.row == notesHeaderIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
-            cell.headerLabel.text = "Notes"
-            cell.addButton.isHidden = true
+            cell.headerLabel.text =  "Notes"
             return cell
             
-        } else {
+        } else { //change this to else if because I'm making extra notes cells when I have a bug
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
-            cell.textContent.text = "add notes here"
+            cell.textContent.text = recipe["notes"] as? String ?? "add notes here"
             return cell
         }
         
@@ -169,64 +160,46 @@ class RecipeDetailsViewController: UITableViewController {
 
     
     @objc func saveRecipe() {
+        print("save button pressed")
         //save recipe to backendless
         //make save button disabled
+        let dataStore = self.backendless?.data.ofTable("Recipe")
+        recipe["ingredient_list"] = ingredients
+        recipe["direction_list"] = directions
+        //recipe["notes"] = notes
+        //recipe["image_path] = someImagePath
+        dataStore?.save(recipe,
+                        response: {
+                            (updatedRecipe) -> () in
+                            print("Recipe saved")
+                            //make "success" popup flash
+                            //set flag for versions to reload.. or send it back on unwind
+        },
+                        error: {
+                            (fault : Fault?) -> () in
+                            print("Server reported an error: \(String(describing: fault))")
+                            //make alert of error
+        })
     }
     
     
     
     @IBAction func addItemButtonPressed(_ sender: Any) {
+        print("add item button pressed")
         if let addButton = sender as? UIButton, let cell = addButton.superview?.superview?.superview as? AddItemCell {
                 print(cell.textField.text ?? "")
             if addButton.tag == 0 {
-                sampleIngredients.append(cell.textField.text ?? "")
+                ingredients.append(cell.textField.text ?? "")
                 DispatchQueue.main.async {
                     self.recipeTable.reloadData()
                 }
             } else if addButton.tag == 1 {
-                sampleDirections.append(cell.textField.text ?? "")
+                directions.append(cell.textField.text ?? "")
                 DispatchQueue.main.async {
                     self.recipeTable.reloadData()
                 }
             }
         }
-    }
-    
-    
-    /**
-     *  !!Not using add('+') buttton currently, texfield cell instead !!!
-     *  Add new cell to appropriate section
-     *  Prompt user for contents of new cell
-     */
-    @IBAction func addButtonPressed(_ sender: Any) {
-        if let button = sender as? UIButton {
-            if button.tag == 0 {
-                sampleIngredients.append("")
-                DispatchQueue.main.async {
-                    self.recipeTable.reloadData()
-                }
-            } else if button.tag == 1 {
-                sampleDirections.append("")
-                DispatchQueue.main.async {
-                    self.recipeTable.reloadData()
-                }
-            }
-        }
-        
-        let alert = UIAlertController(title: "New Ingredient", message: nil , preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.text = "sand"
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let text = alert?.textFields![0].text
-            print(text ?? "spooksville")
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-        //scroll to row and make selected, in edit mode(blinking cursor
-        
     }
     
     
