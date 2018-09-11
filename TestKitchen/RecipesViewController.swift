@@ -23,8 +23,9 @@ class RecipesViewController: UITableViewController {
     var currentUserId = String() //put userID in UserDefaults or something
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         currentUserId = backendless.userService.currentUser.email as String
-        //allRecipes = [mains, sides, appetizers, bakery, desserts, other]
         let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"//add ordered by date_created ascending
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
@@ -110,8 +111,8 @@ class RecipesViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cell = tableView.cellForRow(at: indexPath) as? RecipeCell
                 versionsVC?.title = cell?.nameLabel.text ?? "Unknown"
-                versionsVC?.allVersions = allRecipes.filter { $0["dish_name"] as? String == cell?.nameLabel.text
-                }
+                versionsVC?.userId = currentUserId
+                versionsVC?.dishName = cell?.nameLabel.text ?? ""
             }
             
         }

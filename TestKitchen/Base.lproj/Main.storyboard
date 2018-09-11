@@ -358,10 +358,10 @@
             </objects>
             <point key="canvasLocation" x="-148" y="106.59670164917542"/>
         </scene>
-        <!--Title-->
+        <!--Versions-->
         <scene sceneID="6VB-5y-Qid">
             <objects>
-                <tableViewController id="qu8-Ij-MnT" customClass="RecipeVersionsViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Versions" id="qu8-Ij-MnT" customClass="RecipeVersionsViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Z2X-Z8-zjg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -400,7 +400,7 @@
                             <outlet property="delegate" destination="qu8-Ij-MnT" id="ieu-PG-fqV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="zjw-5W-Hxl">
+                    <navigationItem key="navigationItem" title="Versions" id="zjw-5W-Hxl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HhW-0s-Cye">
                             <connections>
                                 <action selector="addVersionButtonPressed:" destination="qu8-Ij-MnT" id="Pbd-ej-VMN"/>
@@ -408,6 +408,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="versionsTable" destination="Z2X-Z8-zjg" id="Mvy-Wr-nDM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P47-ZJ-DDZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,15 +13,22 @@ class RecipeVersionsViewController: UITableViewController {
     let backendless = Backendless.sharedInstance() as Backendless
     var allVersions = [[String:Any]]()
     var recipeName = String()
+    var dishName = String()
+    var userId = String()
     
+    @IBOutlet var versionsTable: UITableView!
     
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadVersions()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allVersions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "versionCell") as! RecipeVersionCell
         cell.nameLabel.text = allVersions[indexPath.row]["version_name"] as? String
         return cell
@@ -71,6 +78,29 @@ class RecipeVersionsViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func loadVersions(){
+        let whereClause = "user_id = '\(userId)' and dish_name = '\(dishName)'"
+        let queryBuilder = DataQueryBuilder()
+        queryBuilder!.setWhereClause(whereClause)
+        queryBuilder!.setSortBy(["created"])
+        
+        let dataStore = self.backendless.data.ofTable("Recipe")
+        dataStore?.find(queryBuilder,
+                        response: {
+                            (foundVersions) -> () in
+                            self.allVersions = foundVersions as! [[String : Any]]
+                            print(self.allVersions.count)
+                            DispatchQueue.main.async {
+                                self.versionsTable.reloadData()
+                            }
+        },
+                        error: {
+                            (fault : Fault?) -> () in
+                            print("Server reported an error: \(fault ?? Fault()) ")
+        })
     }
     
     

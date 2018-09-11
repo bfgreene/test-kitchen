@@ -11,15 +11,7 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController {
 
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
-    /*
-     Ok so normal: Mains->Original->RecipeDeets .. great passing along same recipe
-            save recipe.. got to versions - need it to reload from backend
-                -could have a flag to reload, not necessarily do it, only if change is made
-                -or could just load every time
-                -or send update recipe backward with unwind
-                -no need to reload dishes menu ever right? if I allow having a dish with no versions(Which seems ok).. so I can only allow dish deletion from that menu
- 
-    */
+
     var recipe = [String : Any]()
     var ingredients = [String]()
     var directions = [String]()
