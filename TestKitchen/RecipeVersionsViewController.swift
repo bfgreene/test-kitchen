@@ -92,7 +92,6 @@ class RecipeVersionsViewController: UITableViewController {
                         response: {
                             (foundVersions) -> () in
                             self.allVersions = foundVersions as! [[String : Any]]
-                            print(self.allVersions.count)
                             DispatchQueue.main.async {
                                 self.versionsTable.reloadData()
                             }

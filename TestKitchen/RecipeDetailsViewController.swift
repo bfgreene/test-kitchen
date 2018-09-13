@@ -8,14 +8,14 @@
 
 import UIKit
 
-class RecipeDetailsViewController: UITableViewController {
+class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
 
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
 
     var recipe = [String : Any]()
     var ingredients = [String]()
     var directions = [String]()
-    var notes = String() //create method where when notes section is changed, it is set to notes var(either on save or on touch to different section
+    var notes = String()
     
     let backendless = Backendless.sharedInstance()
     
@@ -31,12 +31,8 @@ class RecipeDetailsViewController: UITableViewController {
         
         ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        notes = recipe["notes"] as? String ?? ""
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //maybe use to reorder cells? always swipe to delete though and add from bottom.. always allow reordering?
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
        
         // Uncomment if messing with dynamic row height stuff
         // recipeTable.estimatedRowHeight = 44
@@ -134,12 +130,16 @@ class RecipeDetailsViewController: UITableViewController {
             
         } else if indexPath.row == notesHeaderIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! HeaderCell
-            cell.headerLabel.text =  "Notes"
+            cell.headerLabel.text = "Notes"
             return cell
             
         } else { //change this to else if because I'm making extra notes cells when I have a bug
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
-            cell.textContent.text = recipe["notes"] as? String ?? "add notes here"
+            if notes == "" {
+                //add placeholder text
+            } else {
+                cell.textContent.text = notes
+            }
             return cell
         }
         
@@ -153,7 +153,7 @@ class RecipeDetailsViewController: UITableViewController {
         let dataStore = self.backendless?.data.ofTable("Recipe")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
-        //recipe["notes"] = notes
+        recipe["notes"] = notes
         //recipe["image_path] = someImagePath
         
         dataStore?.save(recipe,
@@ -189,6 +189,9 @@ class RecipeDetailsViewController: UITableViewController {
         }
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        notes = textView.text
+    }
     
     /*
     // Override to support conditional editing of the table view.
@@ -207,21 +210,6 @@ class RecipeDetailsViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     */
 

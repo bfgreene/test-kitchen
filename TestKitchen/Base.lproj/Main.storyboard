@@ -511,17 +511,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="..notes section" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ec1-bN-iOT">
-                                            <rect key="frame" x="16" y="6" width="343" height="30"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="[placeholder notes text]" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f9U-EE-Yv1">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="ndL-O6-JKm" id="QO4-qi-kCv"/>
+                                            </connections>
+                                        </textView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="textContent" destination="Ec1-bN-iOT" id="GbT-Eu-KkT"/>
+                                    <outlet property="textContent" destination="f9U-EE-Yv1" id="8wC-Fp-1l1"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
@@ -578,7 +581,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMF-Ca-WSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2170" y="113"/>
+            <point key="canvasLocation" x="2168.8000000000002" y="112.89355322338831"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MS6-Hq-WRr">

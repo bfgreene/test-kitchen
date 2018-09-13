@@ -31,8 +31,8 @@ class ItemCell: UITableViewCell {
 }
 
 class NotesCell: UITableViewCell {
-    
-    @IBOutlet var textContent: UITextField!
+        
+    @IBOutlet var textContent: UITextView!
 }
 
 class AddItemCell: UITableViewCell {
