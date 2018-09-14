@@ -84,6 +84,9 @@ class RecipesViewController: UITableViewController {
             //make new entry in table with given recipe name and 'Original' for default first version
             //segue to that recipe detail? Or just to versionsVC?
             
+            //check for existing recipe with that in name in that course section
+            //reprompt if so
+            
             let recipe = ["course" : self.courseNames[self.menuIndex],
                           "dish_name": textField.text ?? "New Dish",
                           "version_name": "Original",
