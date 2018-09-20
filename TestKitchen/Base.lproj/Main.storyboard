@@ -89,35 +89,42 @@
                         <sections>
                             <tableViewSection id="Q2B-oA-lES">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KhW-NG-FOZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="KhW-NG-FOZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KhW-NG-FOZ" id="uA5-ZS-mQc">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Developer Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jru-n4-Fhr">
-                                                    <rect key="frame" x="16" y="12" width="157" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ8-ZD-s6b">
+                                                    <rect key="frame" x="16" y="8" width="343" height="57"/>
+                                                    <color key="backgroundColor" red="0.11441594246468745" green="0.616493340570619" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="19"/>
+                                                    <state key="normal" title="Developer Info">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="9iT-jV-dcV" kind="show" id="A2g-Ma-zJ6"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="VZ8-ZD-s6b" secondAttribute="trailing" constant="16" id="OvQ-e3-mWF"/>
+                                                <constraint firstItem="VZ8-ZD-s6b" firstAttribute="leading" secondItem="uA5-ZS-mQc" secondAttribute="leading" constant="16" id="R3j-H3-9cb"/>
+                                                <constraint firstItem="VZ8-ZD-s6b" firstAttribute="top" secondItem="uA5-ZS-mQc" secondAttribute="top" constant="8" id="kf2-iN-UPq"/>
+                                                <constraint firstAttribute="bottom" secondItem="VZ8-ZD-s6b" secondAttribute="bottom" id="lTm-gg-jav"/>
+                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="9iT-jV-dcV" kind="show" id="UeJ-tF-yGa"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="PZG-oT-Uxo">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="56"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="PZG-oT-Uxo">
+                                        <rect key="frame" x="0.0" y="65" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZG-oT-Uxo" id="IVT-Ar-VoT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9F-Na-QVP">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="56"/>
+                                                    <rect key="frame" x="16" y="8" width="343" height="57"/>
                                                     <color key="backgroundColor" red="1" green="0.44880160851772732" blue="0.42864666327431955" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="19"/>
                                                     <state key="normal" title="Log Out">
@@ -130,7 +137,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="X9F-Na-QVP" secondAttribute="bottom" id="7k1-X1-Lss"/>
-                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="top" secondItem="IVT-Ar-VoT" secondAttribute="top" id="IFF-wS-o5o"/>
+                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="top" secondItem="IVT-Ar-VoT" secondAttribute="top" constant="8" id="IFF-wS-o5o"/>
                                                 <constraint firstItem="X9F-Na-QVP" firstAttribute="leading" secondItem="IVT-Ar-VoT" secondAttribute="leading" constant="16" id="Y6w-oJ-1QT"/>
                                                 <constraint firstAttribute="trailing" secondItem="X9F-Na-QVP" secondAttribute="trailing" constant="16" id="YSS-7P-ueh"/>
                                             </constraints>
@@ -771,6 +778,6 @@
         <image name="sourd" width="2323" height="2323"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oOe-SE-4ib"/>
+        <segue reference="Sa7-tP-W6B"/>
     </inferredMetricsTieBreakers>
 </document>

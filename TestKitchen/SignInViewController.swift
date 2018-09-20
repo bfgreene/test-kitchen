@@ -19,7 +19,11 @@ class SignInViewController: UIViewController {
 
 
     @IBAction func signInButtonPressed(_ sender: Any) {
-        loginUser()
+        if (!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!) {
+            loginUser()
+        } else {
+            //alert: must enter email and password fields
+        }
     }
     
     /**
@@ -32,6 +36,7 @@ class SignInViewController: UIViewController {
         response: {
             (loggedUser : BackendlessUser?) -> Void in
             print("User logged in")
+            self.passwordField.text = ""
             self.performSegue(withIdentifier: "signInSegue", sender: self)
         },
         error: {
