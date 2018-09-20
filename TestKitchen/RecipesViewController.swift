@@ -26,7 +26,7 @@ class RecipesViewController: UITableViewController {
         super.viewDidLoad()
         
         currentUserId = backendless.userService.currentUser.email as String
-        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"//add ordered by date_created ascending
+        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
         queryBuilder!.setSortBy(["created"])

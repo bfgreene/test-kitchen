@@ -12,6 +12,12 @@ class MenuViewController: UIViewController {
     
     let backendless = Backendless.sharedInstance()!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Cochin-BoldItalic", size: 35)!] //change to better font
+
+    }
+    
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToRecipes", sender: sender)
     }

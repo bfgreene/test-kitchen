@@ -42,6 +42,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         saveButton.isEnabled = true
         self.navigationItem.rightBarButtonItem = saveButton
         
+        recipeTable.keyboardDismissMode = .onDrag 
+        
     }
 
     // MARK: - Table view data source
@@ -191,6 +193,10 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         notes = textView.text
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
     }
     
     /*
