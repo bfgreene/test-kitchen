@@ -35,7 +35,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
 
        
         // Uncomment if messing with dynamic row height stuff
-        // recipeTable.estimatedRowHeight = 44
+         recipeTable.estimatedRowHeight = 45
         // recipeTable.rowHeight = UITableViewAutomaticDimension
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
@@ -63,12 +63,16 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
             height = 60
         case 1:
             height = 150
-        case 2:
-            height = 45
-        case 3 + ingredients.count:
-            height = 45
         default:
-            height = 44
+            height = UITableViewAutomaticDimension
+            //height = getTextViewHeight(text: array[indexPath.row], font: UIFont.systemFont(ofSize: 14))
+
+//        case 2:
+//            height = 45
+//        case 3 + ingredients.count:
+//            height = 45
+//        default:
+//            height = 44
         }
         
         return height
@@ -197,6 +201,24 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
+    }
+    
+    //Source: https://stackoverflow.com/a/44463571
+    func getTextViewHeight(text: String, font: UIFont) -> CGFloat {
+        let textSize: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
+        var height: CGFloat = (textSize.width / UIScreen.main.bounds.width) * font.pointSize
+        
+        var lineBreaks: CGFloat = 0
+        if text.contains("\n") {
+            for char in text{
+                if char == "\n" {
+                    lineBreaks += (font.pointSize + 12)
+                }
+            }
+        }
+        
+        height += lineBreaks
+        return height + 60
     }
     
     /*

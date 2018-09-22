@@ -13,18 +13,56 @@ class RecipesViewController: UITableViewController {
     
     var menuIndex = 0
     let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] //put in constants file or something
-    
-
     @IBOutlet var recipesTableView: UITableView!
-    
     var allRecipes = [[String : Any]]()
     var uniqueDishes = [String]()
     let backendless = Backendless.sharedInstance() as Backendless
     var currentUserId = String() //put userID in UserDefaults or something
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDishes()
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let numDishes = uniqueDishes.count
+        if numDishes == 0 {
+            //TODO: change to "no recipes!".. make square, centered, doesn't flash before first load
+            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "sourd"))
+        } else {
+            recipesTableView.backgroundView = nil
+        }
+        return uniqueDishes.count
         
+    }
+    
+    
+    
+   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
+        cell.nameLabel.text = uniqueDishes[indexPath.row]
+        return cell
+    }
+
+    
+    
+    /**
+     *  Create new Recipe based on user input from alert
+     *  Save to backendless db
+     *
+     */
+    @IBAction func addRecipeButtonPressed(_ sender: Any) {
+        promptForDishName(false)
+    }
+    
+    
+    
+    func loadDishes() {
         currentUserId = backendless.userService.currentUser.email as String
         let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
@@ -51,61 +89,50 @@ class RecipesViewController: UITableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numDishes = uniqueDishes.count
-        if numDishes == 0 {
-            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "sourd")) //change to "no recipes! image".. make square and centered to fit all screens and that it doesn't flash before first load
-        } else {
-            recipesTableView.backgroundView = nil
-        }
-        return uniqueDishes.count
-        
-    }
     
-   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
-        cell.nameLabel.text = uniqueDishes[indexPath.row]
-        return cell
-    }
-
-    /**
-     *  Create new Recipe based on user input from alert
-     *  Save to backendless db
-     *
-     */
-    @IBAction func addRecipeButtonPressed(_ sender: Any) {
+    func promptForDishName(_ isReprompt: Bool) {
         let alert = UIAlertController(title: "New Recipe", message: "What is the name of the recipe?", preferredStyle: .alert)
+        
+        if isReprompt {
+            alert.title? = "Please enter a unique name"
+        }
         
         alert.addTextField()
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            print("Text field: \(String(describing: textField.text))")
-            //make new entry in table with given recipe name and 'Original' for default first version
-            //segue to that recipe detail? Or just to versionsVC?
             
-            //check for existing recipe with that in name in that course section
-            //reprompt if so
-            
-            let recipe = ["course" : self.courseNames[self.menuIndex],
-                          "dish_name": textField.text ?? "New Dish",
-                          "version_name": "Original",
-                          "user_id" : self.currentUserId] as [String : Any]
-            let dataStore = self.backendless.data.ofTable("Recipe")
-            dataStore!.save(recipe,
-                            response: {
-                                (recipe) -> () in
-                                print("Recipe saved")
-            },
-                            error: {
-                                (fault : Fault?) -> () in
-                                print("Server reported an error: \(fault ?? Fault())")
-            })
+            //reprompt if dish with that name exists
+            if let dishName = textField.text, self.uniqueDishes.contains(dishName) {
+                self.promptForDishName(true)
+            } else {
+                self.saveNewDish(withDishName: textField.text ?? "New Dish")
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
+    
+    func saveNewDish(withDishName dishName: String) {
+        let recipe = ["course" : self.courseNames[self.menuIndex],
+                      "dish_name": dishName,
+                      "version_name": "Original",
+                      "user_id" : self.currentUserId] as [String : Any]
+        let dataStore = self.backendless.data.ofTable("Recipe")
+        dataStore!.save(recipe,
+                        response: {
+                            (recipe) -> () in
+                            print("Recipe saved")
+                            //segue to versions
+        },
+                        error: {
+                            (fault : Fault?) -> () in
+                            print("Server reported an error: \(fault ?? Fault())")
+        })
+    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -117,11 +144,11 @@ class RecipesViewController: UITableViewController {
                 versionsVC?.userId = currentUserId
                 versionsVC?.dishName = cell?.nameLabel.text ?? ""
             }
-            
         }
     }
-
 }
+
+
 
 class RecipeCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
