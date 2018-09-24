@@ -93,9 +93,7 @@ class RecipesViewController: UITableViewController {
     func promptForDishName(_ isReprompt: Bool) {
         let alert = UIAlertController(title: "New Recipe", message: "What is the name of the recipe?", preferredStyle: .alert)
         
-        if isReprompt {
-            alert.title? = "Please enter a unique name"
-        }
+        if isReprompt { alert.title? = "Please enter a unique name" }
         
         alert.addTextField()
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in

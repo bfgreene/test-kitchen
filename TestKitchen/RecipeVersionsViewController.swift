@@ -38,46 +38,67 @@ class RecipeVersionsViewController: UITableViewController {
         return 1
     }
     
+
     
-    /**
-     *  Create new version of recipe based on user input
-     *  Save to backendless
-     *  Segue to Recipe Detail of new version
-     */
+    
     @IBAction func addVersionButtonPressed(_ sender: Any) {
+        promptForVersionName(reprompt: false)
+    }
+    
+    
+    func promptForVersionName(reprompt isReprompt: Bool) {
         let alert = UIAlertController(title: "New Version", message: "What is the name of the recipe version?", preferredStyle: .alert)
+        
+        if isReprompt { alert.title? = "Please enter a unique version name" }
         
         alert.addTextField { (textField) in
             textField.text = "Version \(self.allVersions.count + 1)"
         }
+        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            print("Text field: \(String(describing: textField.text))")
-            //create new entry in table with current dish_name and specified version title, segue to new recipe
-            //add it to allVersions so it shows up when
-            //make option to make new version based of existing version?
-            let recipe = ["course": self.allVersions[0]["course"],
-                          "dish_name" : self.allVersions[0]["dish_name"],
-                          "user_id" : self.allVersions[0]["user_id"],
-                          "version_name" : textField.text ?? "Version \(self.allVersions.count + 1)"
-            ] //default bases off of "original"... come up with way without indexing
-            let dataStore = self.backendless.data.ofTable("Recipe")
-            dataStore!.save(recipe,
-                            response: {
-                                (recipe) -> () in
-                                print(recipe ?? "nil")
-                                //segue to new version
-            },
-                            error: {
-                                (fault : Fault?) -> () in
-                                print("Server error: \(fault ?? Fault())")
-                                //display error message
-                                
-            })
+            var versionNameExists = false
+            if let inputName = textField.text {
+                for version in self.allVersions {
+                    if version["version_name"] as! String == inputName {
+                        versionNameExists = true
+                    }
+                }
+            }
+            
+            if versionNameExists {
+                self.promptForVersionName(reprompt: true)
+            } else {
+                self.saveNewVersion(withVersionName: textField.text! as String)
+            }
+            
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func saveNewVersion(withVersionName versionName: String) {
+        //TODO: make option to make new version based off specific existing version? come up with way to not use indexing in case all versions deleted
+        let recipe = ["course": self.allVersions[0]["course"],
+                      "dish_name" : self.allVersions[0]["dish_name"],
+                      "user_id" : self.allVersions[0]["user_id"],
+                      "version_name" : versionName
+        ]
+        let dataStore = self.backendless.data.ofTable("Recipe")
+        dataStore!.save(recipe,
+                        response: {
+                            (recipe) -> () in
+                            print("New version created")
+                            //segue to new version
+        },
+                        error: {
+                            (fault : Fault?) -> () in
+                            print("Server error: \(fault ?? Fault())")
+                            //display error message
+                            
+        })
     }
     
     

@@ -14,7 +14,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //change title header font.. haven't found right fit
+        //TODO: change title header font.. haven't found right fit
         //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Palatino-Italic", size: 25)!] //change to better font
 
     }
