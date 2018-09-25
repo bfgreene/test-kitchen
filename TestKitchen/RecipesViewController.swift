@@ -124,6 +124,8 @@ class RecipesViewController: UITableViewController {
                             (recipe) -> () in
                             print("Recipe saved")
                             //segue to versions
+                            self.loadDishes()
+                            self.recipesTableView.reloadData()
         },
                         error: {
                             (fault : Fault?) -> () in

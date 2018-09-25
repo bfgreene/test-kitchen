@@ -91,12 +91,13 @@ class RecipeVersionsViewController: UITableViewController {
                         response: {
                             (recipe) -> () in
                             print("New version created")
+                            self.loadVersions()
+                            self.versionsTable.reloadData()
                             //segue to new version
         },
                         error: {
                             (fault : Fault?) -> () in
                             print("Server error: \(fault ?? Fault())")
-                            //display error message
                             
         })
     }
