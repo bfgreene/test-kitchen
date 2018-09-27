@@ -56,7 +56,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
             height = 150
         default:
             height = UITableViewAutomaticDimension
-            //height = getTextViewHeight(text: array[indexPath.row], font: UIFont.systemFont(ofSize: 14))
         }
         return height
     }
@@ -186,24 +185,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
     }
     
-    //Source: https://stackoverflow.com/a/44463571
-    func getTextViewHeight(text: String, font: UIFont) -> CGFloat {
-        let textSize: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
-        var height: CGFloat = (textSize.width / UIScreen.main.bounds.width) * font.pointSize
-        
-        var lineBreaks: CGFloat = 0
-        if text.contains("\n") {
-            for char in text{
-                if char == "\n" {
-                    lineBreaks += (font.pointSize + 12)
-                }
-            }
-        }
-        
-        height += lineBreaks
-        return height + 60
-    }
-    
     
     /*
      *  General additional UI setup:
@@ -222,24 +203,33 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         recipeTable.keyboardDismissMode = .onDrag
     }
     
-    /*
-    // Override to support conditional editing of the table view.
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        let firstIngredientIndex = 3
+        let firstDirectionIndex = firstIngredientIndex + ingredients.count + 2
+        
+        switch indexPath.row {
+        case firstIngredientIndex..<firstIngredientIndex+ingredients.count :
+            return true
+        case firstDirectionIndex..<firstDirectionIndex+directions.count:
+            return true
+        default:
+            return false
+        }
     }
-    */
+ 
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // TODO: Make constants for indexes
+            if indexPath.row < ingredients.count + 3 {
+                ingredients.remove(at: (indexPath.row-3))
+            } else {
+                directions.remove(at: (indexPath.row-ingredients.count-5))
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
+ 
 
 }
