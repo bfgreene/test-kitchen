@@ -22,30 +22,21 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet var recipeTable: UITableView!
     
     /**
-     *  Add save button programmatically
      *  Grab recipe details from db
+     *  Additional UI setup
      */
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
         notes = recipe["notes"] as? String ?? ""
-
        
-        // Uncomment if messing with dynamic row height stuff
-         recipeTable.estimatedRowHeight = 45
-        // recipeTable.rowHeight = UITableViewAutomaticDimension
-        
-        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
-        saveButton.isEnabled = true
-        self.navigationItem.rightBarButtonItem = saveButton
-        
-        recipeTable.keyboardDismissMode = .onDrag 
-        
+        setupUI()
     }
 
+    
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -66,15 +57,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         default:
             height = UITableViewAutomaticDimension
             //height = getTextViewHeight(text: array[indexPath.row], font: UIFont.systemFont(ofSize: 14))
-
-//        case 2:
-//            height = 45
-//        case 3 + ingredients.count:
-//            height = 45
-//        default:
-//            height = 44
         }
-        
         return height
     }
     
@@ -139,7 +122,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
             cell.headerLabel.text = "Notes"
             return cell
             
-        } else { //change this to else if because I'm making extra notes cells when I have a bug
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
             if notes == "" {
                 //add placeholder text
@@ -219,6 +202,24 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         
         height += lineBreaks
         return height + 60
+    }
+    
+    
+    /*
+     *  General additional UI setup:
+     *  allow for dynamic row heights
+     *  add save button programatically
+     *  allow for swipe keyboard dismiss
+     */
+    func setupUI() {
+        //for dynamic row heights
+        recipeTable.estimatedRowHeight = 45
+        
+        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
+        saveButton.isEnabled = true
+        self.navigationItem.rightBarButtonItem = saveButton
+        
+        recipeTable.keyboardDismissMode = .onDrag
     }
     
     /*

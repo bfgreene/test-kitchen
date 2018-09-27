@@ -498,14 +498,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="∙ Ingredient / 1. Direction " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-NK-noR">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∙ Ingredient / 1. Direction " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-NK-noR">
+                                            <rect key="frame" x="16" y="10" width="343" height="23.5"/>
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="npQ-NK-noR" secondAttribute="bottom" constant="10" id="ElA-6c-1fN"/>
+                                        <constraint firstItem="npQ-NK-noR" firstAttribute="leading" secondItem="v9l-xq-RQW" secondAttribute="leading" constant="16" id="dFF-wL-J5W"/>
+                                        <constraint firstItem="npQ-NK-noR" firstAttribute="top" secondItem="v9l-xq-RQW" secondAttribute="top" constant="10" id="eSc-hD-BDw"/>
+                                        <constraint firstAttribute="trailing" secondItem="npQ-NK-noR" secondAttribute="trailing" constant="16" id="jed-TL-IVa"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contentLabel" destination="npQ-NK-noR" id="kcX-UC-XQ3"/>
@@ -542,16 +547,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lbP-O9-w0g">
-                                            <rect key="frame" x="16" y="0.0" width="351" height="43.5"/>
+                                            <rect key="frame" x="16" y="5" width="351" height="33.5"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-Sz-jAr">
-                                                    <rect key="frame" x="0.0" y="7" width="313" height="30"/>
+                                                    <rect key="frame" x="0.0" y="2" width="313" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A3-Jp-brn">
-                                                    <rect key="frame" x="321" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="321" y="2" width="30" height="30"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
                                                         <action selector="addItemButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="Ebn-gs-rbA"/>
@@ -564,9 +569,9 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="lbP-O9-w0g" secondAttribute="bottom" id="Aid-hf-NFY"/>
+                                        <constraint firstAttribute="bottom" secondItem="lbP-O9-w0g" secondAttribute="bottom" constant="5" id="Aid-hf-NFY"/>
                                         <constraint firstItem="lbP-O9-w0g" firstAttribute="leading" secondItem="61s-l3-qq2" secondAttribute="leading" constant="16" id="cQq-3t-Zer"/>
-                                        <constraint firstItem="lbP-O9-w0g" firstAttribute="top" secondItem="61s-l3-qq2" secondAttribute="top" id="n3x-94-m29"/>
+                                        <constraint firstItem="lbP-O9-w0g" firstAttribute="top" secondItem="61s-l3-qq2" secondAttribute="top" constant="5" id="n3x-94-m29"/>
                                         <constraint firstAttribute="trailing" secondItem="lbP-O9-w0g" secondAttribute="trailing" constant="8" id="qmB-2l-M2b"/>
                                     </constraints>
                                 </tableViewCellContentView>
