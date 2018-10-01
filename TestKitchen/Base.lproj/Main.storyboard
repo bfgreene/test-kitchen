@@ -537,6 +537,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textContent" destination="f9U-EE-Yv1" id="8wC-Fp-1l1"/>
+                                    <segue destination="MW4-gX-eK9" kind="show" id="9YA-4q-KmV"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
@@ -594,6 +595,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMF-Ca-WSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2168.8000000000002" y="112.89355322338831"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1Py-Ik-6SO">
+            <objects>
+                <viewController id="MW4-gX-eK9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uhI-vE-auk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="[Edit notes or ingredient/direction here]" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-z4-VzN">
+                                <rect key="frame" x="16" y="64" width="343" height="587"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Qik-bt-tgZ" firstAttribute="trailing" secondItem="7QI-z4-VzN" secondAttribute="trailing" constant="16" id="H2j-5x-Syg"/>
+                            <constraint firstItem="Qik-bt-tgZ" firstAttribute="bottom" secondItem="7QI-z4-VzN" secondAttribute="bottom" constant="16" id="HsD-Ze-goO"/>
+                            <constraint firstItem="7QI-z4-VzN" firstAttribute="top" secondItem="Qik-bt-tgZ" secondAttribute="top" id="dqZ-m1-QHe"/>
+                            <constraint firstItem="7QI-z4-VzN" firstAttribute="leading" secondItem="Qik-bt-tgZ" secondAttribute="leading" constant="16" id="jHV-zt-dfH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Qik-bt-tgZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OPD-rR-sjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2853.5999999999999" y="104.7976011994003"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MS6-Hq-WRr">
