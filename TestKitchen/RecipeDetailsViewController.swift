@@ -35,7 +35,10 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         setupUI()
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recipeTable.reloadData()
+    }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,7 +129,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
             if notes == "" {
                 //add placeholder text
             } else {
-                cell.textContent.text = notes
+                cell.contentLabel.text = notes
             }
             return cell
         }
@@ -228,6 +231,15 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
                 directions.remove(at: (indexPath.row-ingredients.count-5))
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToEditor" {
+            if let editingVC = segue.destination as? EditingViewController {
+                editingVC.editingText = notes
+            }
         }
     }
  

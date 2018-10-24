@@ -516,28 +516,25 @@
                                     <outlet property="contentLabel" destination="npQ-NK-noR" id="kcX-UC-XQ3"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="notesCell" id="ihc-78-tgs" customClass="NotesCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="notesCell" id="ihc-78-tgs" customClass="NotesCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="327" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ihc-78-tgs" id="5R7-Cu-zMJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="[placeholder notes text]" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f9U-EE-Yv1">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhc-y7-SwP">
+                                            <rect key="frame" x="16" y="0.0" width="325" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="ndL-O6-JKm" id="QO4-qi-kCv"/>
-                                            </connections>
-                                        </textView>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="textContent" destination="f9U-EE-Yv1" id="8wC-Fp-1l1"/>
-                                    <segue destination="MW4-gX-eK9" kind="show" id="9YA-4q-KmV"/>
+                                    <outlet property="contentLabel" destination="Zhc-y7-SwP" id="gnQ-mQ-mj9"/>
+                                    <segue destination="MW4-gX-eK9" kind="show" identifier="segueToEditor" id="9YA-4q-KmV"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">
@@ -596,10 +593,10 @@
             </objects>
             <point key="canvasLocation" x="2168.8000000000002" y="112.89355322338831"/>
         </scene>
-        <!--View Controller-->
+        <!--Editing View Controller-->
         <scene sceneID="1Py-Ik-6SO">
             <objects>
-                <viewController id="MW4-gX-eK9" sceneMemberID="viewController">
+                <viewController id="MW4-gX-eK9" customClass="EditingViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uhI-vE-auk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -620,6 +617,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qik-bt-tgZ"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="7QI-z4-VzN" id="d2s-Xw-Cm1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPD-rR-sjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

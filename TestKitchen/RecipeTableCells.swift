@@ -32,7 +32,7 @@ class ItemCell: UITableViewCell {
 
 class NotesCell: UITableViewCell {
         
-    @IBOutlet var textContent: UITextView!
+    @IBOutlet var contentLabel: UILabel!
 }
 
 class AddItemCell: UITableViewCell {

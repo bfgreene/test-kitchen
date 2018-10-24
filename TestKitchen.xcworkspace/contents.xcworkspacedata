@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TestKitchen/EditingViewController.swift">
+      location = "group:/Users/Ben/Desktop/dev/TestKitchen/TestKitchen/EditingViewController.swift">
    </FileRef>
    <FileRef
       location = "group:TestKitchen.xcodeproj">
