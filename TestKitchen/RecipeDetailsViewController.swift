@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
+class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, recipeUpdator {
 
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
 
@@ -33,11 +33,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         notes = recipe["notes"] as? String ?? ""
        
         setupUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        recipeTable.reloadData()
     }
     
     // MARK: - Table view data source
@@ -234,14 +229,30 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate {
         }
     }
     
+    /*
+     * recipeUpdator protocol functions
+     */
+    func updateNotes(newNotes: String) {
+        notes = newNotes
+        DispatchQueue.main.async {
+            self.recipeTable.reloadData()
+        }
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToEditor" {
             if let editingVC = segue.destination as? EditingViewController {
                 editingVC.editingText = notes
+                editingVC.delegate = self
             }
         }
     }
  
 
+}
+
+protocol recipeUpdator {
+    func updateNotes(newNotes: String)
 }

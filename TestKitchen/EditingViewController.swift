@@ -11,19 +11,31 @@ class EditingViewController: UIViewController {
     
     @IBOutlet var textView: UITextView!
     var editingText = String()
+    var delegate: recipeUpdator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.text = editingText
-        //add cancel/save buttons programatically
+        
+        //add cancel and save buttons programatically
+        self.navigationItem.hidesBackButton = true
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditingViewController.cancel(sender:)))
+        self.navigationItem.leftBarButtonItem = cancelButton
+        
+        let saveButton = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditingViewController.save(sender:)))
+        self.navigationItem.rightBarButtonItem = saveButton
     }
 
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? RecipeDetailsViewController {
-            destinationVC.notes = textView.text
-        }
+    @objc func cancel(sender: UIBarButtonItem) {
+        _ = navigationController?.popViewController(animated: true)
     }
+
+    @objc func save(sender: UIBarButtonItem) {
+        _ = navigationController?.popViewController(animated: true)
+        delegate?.updateNotes(newNotes: textView.text)
+    }
+    
+  
     
 
 }
