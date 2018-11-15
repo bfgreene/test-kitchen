@@ -491,15 +491,15 @@
                                     <outlet property="headerLabel" destination="Kkj-8l-drQ" id="fHq-zH-Qsj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="itemCell" id="ckk-KW-eH1" customClass="ItemCell" customModule="TestKitchen" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="itemCell" id="ckk-KW-eH1" customClass="ItemCell" customModule="TestKitchen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="283" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckk-KW-eH1" id="v9l-xq-RQW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∙ Ingredient / 1. Direction " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-NK-noR">
-                                            <rect key="frame" x="16" y="10" width="343" height="23.5"/>
+                                            <rect key="frame" x="16" y="10" width="309" height="23.5"/>
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -514,6 +514,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contentLabel" destination="npQ-NK-noR" id="kcX-UC-XQ3"/>
+                                    <segue destination="MW4-gX-eK9" kind="show" identifier="segueToEditor" id="1XK-K8-xkp"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="notesCell" id="ihc-78-tgs" customClass="NotesCell" customModule="TestKitchen" customModuleProvider="target">
@@ -534,7 +535,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contentLabel" destination="Zhc-y7-SwP" id="gnQ-mQ-mj9"/>
-                                    <segue destination="MW4-gX-eK9" kind="show" identifier="segueToEditor" id="9YA-4q-KmV"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="jmd-UY-GVL" customClass="AddItemCell" customModule="TestKitchen" customModuleProvider="target">

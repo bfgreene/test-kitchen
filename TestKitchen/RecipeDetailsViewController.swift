@@ -17,6 +17,10 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
     var directions = [String]()
     var notes = String()
     
+    
+    var directionsHeaderIndex, notesHeaderIndex, addIngredientIndex, addDirectionIndex, firstIngredientIndex, firstDirectionIndex : Int!
+ 
+    
     let backendless = Backendless.sharedInstance()
     
     @IBOutlet var recipeTable: UITableView!
@@ -32,6 +36,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
         notes = recipe["notes"] as? String ?? ""
        
+        updateReferenceIndicies()
         setupUI()
     }
     
@@ -64,11 +69,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
      *  Determine which custom cell to deque based on position in table
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // define higher up? switch?
-        let directionsHeaderIndex = 4 + ingredients.count
-        let notesHeaderIndex = directionsHeaderIndex + directions.count + 2
-        let addIngredientIndex = directionsHeaderIndex - 1
-        let addDirectionIndex = notesHeaderIndex - 1
+        updateReferenceIndicies()
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! TitleCell
@@ -120,7 +121,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
             if notes == "" {
                 //add placeholder text
             } else {
@@ -175,13 +176,17 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        notes = textView.text
-    }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
-    }
+    /*
+     *  Commented these below methods out for now.. unnecessary with new editing view
+     */
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        notes = textView.text
+//    }
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
+//    }
     
     
     /*
@@ -232,20 +237,46 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
     /*
      * recipeUpdator protocol functions
      */
-    func updateNotes(newNotes: String) {
-        notes = newNotes
-        DispatchQueue.main.async {
-            self.recipeTable.reloadData()
+    func updateCell(newContent: String, forCellAt indexPath: IndexPath?) {
+        
+        if indexPath != nil && indexPath!.row < recipeTable.numberOfRows(inSection: 0) {
+            let tableIndex = indexPath!.row
+            var dataArrayIndex = Int()
+            if tableIndex >= firstIngredientIndex && tableIndex < (firstIngredientIndex+ingredients.count) {
+                dataArrayIndex = tableIndex - firstIngredientIndex
+                ingredients[dataArrayIndex] = newContent
+            } else if tableIndex >= firstDirectionIndex && tableIndex < (firstDirectionIndex+directions.count) {
+                dataArrayIndex = tableIndex - firstDirectionIndex
+                directions[dataArrayIndex] = newContent
+            } else if tableIndex == notesHeaderIndex + 1 {
+                notes = newContent
+            }
+            
+            DispatchQueue.main.async {
+                self.recipeTable.reloadData()
+            }
         }
+        
     }
     
-    
+    //make this into a dictionary?
+    func updateReferenceIndicies() {
+        firstIngredientIndex = 3
+        directionsHeaderIndex = 4 + ingredients.count
+        firstDirectionIndex = directionsHeaderIndex + 1
+        notesHeaderIndex = directionsHeaderIndex + directions.count + 2
+        addIngredientIndex = directionsHeaderIndex - 1
+        addDirectionIndex = notesHeaderIndex - 1
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToEditor" {
             if let editingVC = segue.destination as? EditingViewController {
-                editingVC.editingText = notes
+                let indexPath = recipeTable.indexPathForSelectedRow
+                let selectedCell = recipeTable.cellForRow(at: indexPath!) as? ItemCell
+                editingVC.editingText = (selectedCell?.contentLabel.text)!
                 editingVC.delegate = self
+                editingVC.indexPath = indexPath
             }
         }
     }
@@ -254,5 +285,5 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
 }
 
 protocol recipeUpdator {
-    func updateNotes(newNotes: String)
+    func updateCell(newContent: String, forCellAt indexPath: IndexPath?)
 }

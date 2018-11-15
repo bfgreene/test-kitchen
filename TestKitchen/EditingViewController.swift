@@ -11,6 +11,7 @@ class EditingViewController: UIViewController {
     
     @IBOutlet var textView: UITextView!
     var editingText = String()
+    var indexPath: IndexPath?
     var delegate: recipeUpdator?
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class EditingViewController: UIViewController {
 
     @objc func save(sender: UIBarButtonItem) {
         _ = navigationController?.popViewController(animated: true)
-        delegate?.updateNotes(newNotes: textView.text)
+        delegate?.updateCell(newContent: textView.text, forCellAt: indexPath)
     }
     
   
