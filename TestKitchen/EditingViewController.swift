@@ -18,7 +18,7 @@ class EditingViewController: UIViewController {
         super.viewDidLoad()
         textView.text = editingText
         
-        //add cancel and save buttons programatically
+        //adding cancel and save buttons programatically
         self.navigationItem.hidesBackButton = true
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditingViewController.cancel(sender:)))
         self.navigationItem.leftBarButtonItem = cancelButton

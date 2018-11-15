@@ -259,7 +259,17 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
         
     }
     
-    //make this into a dictionary?
+    func removePrefix(ofString text: String, atIndex itemIndex: Int) -> String {
+        var substringIndex = text.startIndex
+        if itemIndex >= firstIngredientIndex && itemIndex < (firstIngredientIndex+ingredients.count) {
+            substringIndex = text.index(text.startIndex, offsetBy: 2)
+        } else if itemIndex >= firstDirectionIndex && itemIndex < (firstDirectionIndex+directions.count) {
+            substringIndex = text.index(text.startIndex, offsetBy: 3)
+        }
+        
+        return String(text[substringIndex...])
+    }
+    
     func updateReferenceIndicies() {
         firstIngredientIndex = 3
         directionsHeaderIndex = 4 + ingredients.count
@@ -274,7 +284,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
             if let editingVC = segue.destination as? EditingViewController {
                 let indexPath = recipeTable.indexPathForSelectedRow
                 let selectedCell = recipeTable.cellForRow(at: indexPath!) as? ItemCell
-                editingVC.editingText = (selectedCell?.contentLabel.text)!
+                let text = removePrefix(ofString: (selectedCell?.contentLabel.text)!, atIndex: indexPath!.row)
+                editingVC.editingText = text
                 editingVC.delegate = self
                 editingVC.indexPath = indexPath
             }
