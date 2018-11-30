@@ -16,6 +16,7 @@ class RecipesViewController: UITableViewController {
     @IBOutlet var recipesTableView: UITableView!
     var allRecipes = [[String : Any]]()
     var uniqueDishes = [String]()
+    var showNoRecipesImage = false
     let backendless = Backendless.sharedInstance() as Backendless
     var currentUserId = String() //put userID in UserDefaults or something
     
@@ -23,16 +24,21 @@ class RecipesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDishes()
+       // loadDishes()
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadDishes() //trying here to get spinner to show
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numDishes = uniqueDishes.count
         if numDishes == 0 {
-            //TODO: change to "no recipes!".. make square, centered, doesn't flash before first load
-            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "sourd"))
+            //TODO: change to "no recipes!".. make square, centered, doesn't flash before first load(doesn't show at at all if there are recipes but just haven't loaded yet
+            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "NoRecipes"))
+            recipesTableView.backgroundView?.contentMode = .scaleAspectFit
         } else {
             recipesTableView.backgroundView = nil
         }
@@ -63,6 +69,11 @@ class RecipesViewController: UITableViewController {
     
     
     func loadDishes() {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         currentUserId = backendless.userService.currentUser.email as String
         let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
@@ -81,11 +92,16 @@ class RecipesViewController: UITableViewController {
                                 }
                             }
                             self.recipesTableView.reloadData()
+                            activityIndicator.removeFromSuperview()
+
         },
                         error: {
                             (fault : Fault?) -> () in
                             print("Server reported an error: \(fault ?? Fault()) ")
+                            activityIndicator.removeFromSuperview()
+
         })
+
     }
     
     
