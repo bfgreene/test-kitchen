@@ -24,7 +24,7 @@ class RecipesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // loadDishes()
+        //loadDishes()
     }
     
     override func viewDidAppear(_ animated: Bool) {

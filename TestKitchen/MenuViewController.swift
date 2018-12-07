@@ -16,6 +16,10 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         //TODO: change title header font.. haven't found right fit
         //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Palatino-Italic", size: 25)!] //change to better font
+        
+        //remove bottom line from navigation bar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
 
     }
     
