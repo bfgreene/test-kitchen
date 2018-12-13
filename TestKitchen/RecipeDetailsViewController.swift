@@ -8,22 +8,23 @@
 
 import UIKit
 
-class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, recipeUpdator {
+class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, recipeUpdator {
 
+    let backendless = Backendless.sharedInstance()
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
-
     var recipe = [String : Any]()
     var ingredients = [String]()
     var directions = [String]()
     var notes = String()
-    
-    
+    var dishImage: UIImage?
     var directionsHeaderIndex, notesHeaderIndex, addIngredientIndex, addDirectionIndex, firstIngredientIndex, firstDirectionIndex : Int!
  
-    
-    let backendless = Backendless.sharedInstance()
-    
+
     @IBOutlet var recipeTable: UITableView!
+    
+    
+    
+    
     
     /**
      *  Grab recipe details from db
@@ -56,7 +57,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
         case 0:
             height = 60
         case 1:
-            height = 150
+            height = dishImage != nil ? 400 : 150
         default:
             height = UITableViewAutomaticDimension
         }
@@ -78,8 +79,14 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
             
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
-            //set image for that recipe or default "add image"
-            cell.recipeImage.image = #imageLiteral(resourceName: "sourd")
+            if let img = dishImage {
+                cell.backgroundImageView.image = img
+                cell.addPhotoButton.isHidden = true
+                cell.backgroundAddButton.isHidden = true
+            } else {
+                cell.addPhotoButton.isHidden = false
+                cell.backgroundAddButton.isHidden = false
+            }
             return cell
             
         } else if indexPath.row == 2 {
@@ -176,17 +183,69 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
         }
     }
     
-    
+
     /*
-     *  Commented these below methods out for now.. unnecessary with new editing view
+     * Action Sheet for selecting dish image from gallery/camera
      */
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        notes = textView.text
-//    }
+    @IBAction func addPhotoButtonPressed(_ sender: Any) {
+        var prompt = "Choose Dish Image "
+        if let btn = sender as? UIButton {
+            if btn.tag == 1 {
+                prompt = "Replace Dish Image"
+            }
+        }
+            
+        let alert = UIAlertController(title: prompt, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in self.openCamera()
+        }))
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in self.openGallery()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        return textView.text.count + (text.count - range.length) <= 5000 //arbitrary 5000 character limit for notes... needs to be < 21000 for backendless
-//    }
+    func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "No Camera Access", message: "You have not given access to the camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openGallery() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "No Gallery Access", message: "You have not given access to the photo gallery", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            dishImage = chosenImage
+            DispatchQueue.main.async {
+                self.recipeTable.reloadData()
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
     
     
     /*
@@ -222,7 +281,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, re
     }
  
 
-        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // TODO: Make constants for indexes
             if indexPath.row < ingredients.count + 3 {

@@ -1,10 +1,9 @@
 //
 //  EditingViewController.swift
-//  
+//
 //
 //  Created by Ben Greene on 10/1/18.
 //
-
 import UIKit
 
 class EditingViewController: UIViewController {
@@ -26,17 +25,17 @@ class EditingViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditingViewController.save(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
     }
-
+    
     @objc func cancel(sender: UIBarButtonItem) {
         _ = navigationController?.popViewController(animated: true)
     }
-
+    
     @objc func save(sender: UIBarButtonItem) {
         _ = navigationController?.popViewController(animated: true)
         delegate?.updateCell(newContent: textView.text, forCellAt: indexPath)
     }
     
-  
     
-
+    
+    
 }

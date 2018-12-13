@@ -11,11 +11,11 @@
 		B50A0CCA20A0B74300C55233 /* RecipeVersionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */; };
 		B50A0CCC20A20F9A00C55233 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */; };
 		B52A734520BF2B2800E797B4 /* RecipeTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */; };
-		B52B1371218110ED009FB91E /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52B1370218110ED009FB91E /* EditingViewController.swift */; };
 		B53DDA5820E14FB400DD82DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DDA5720E14FB400DD82DF /* RegisterViewController.swift */; };
 		B53DDA5C20E1506700DD82DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DDA5B20E1506700DD82DF /* SignInViewController.swift */; };
 		B546441421403F20009C9150 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546441321403F20009C9150 /* SettingsTableViewController.swift */; };
 		B5D8FD6320AF6F7700E2C5C2 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */; };
+		B5ECC7EF21BB1BB9007CEDB5 /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECC7EE21BB1BB9007CEDB5 /* EditingViewController.swift */; };
 		B5EF70D0209BB0F900F4F498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */; };
 		B5EF70D5209BB0F900F4F498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EF70D3209BB0F900F4F498 /* Main.storyboard */; };
 		B5EF70D8209BB0F900F4F498 /* TestKitchen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5EF70D6209BB0F900F4F498 /* TestKitchen.xcdatamodeld */; };
@@ -32,11 +32,11 @@
 		B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVersionsViewController.swift; sourceTree = "<group>"; };
 		B50A0CCB20A20F9A00C55233 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableCells.swift; sourceTree = "<group>"; };
-		B52B1370218110ED009FB91E /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditingViewController.swift; path = /Users/Ben/Desktop/dev/TestKitchen/TestKitchen/EditingViewController.swift; sourceTree = "<absolute>"; };
 		B53DDA5720E14FB400DD82DF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B53DDA5B20E1506700DD82DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B546441321403F20009C9150 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
+		B5ECC7EE21BB1BB9007CEDB5 /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViewController.swift; sourceTree = "<group>"; };
 		B5EF70CC209BB0F900F4F498 /* TestKitchen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestKitchen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EF70CF209BB0F900F4F498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5EF70D4209BB0F900F4F498 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,9 +107,9 @@
 				B50A0CC920A0B74300C55233 /* RecipeVersionsViewController.swift */,
 				B5D8FD6220AF6F7700E2C5C2 /* RecipeDetailsViewController.swift */,
 				B52A734420BF2B2800E797B4 /* RecipeTableCells.swift */,
-				B52B1370218110ED009FB91E /* EditingViewController.swift */,
 				B5EF70E4209BB19C00F4F498 /* Recipe.swift */,
 				B546441321403F20009C9150 /* SettingsTableViewController.swift */,
+				B5ECC7EE21BB1BB9007CEDB5 /* EditingViewController.swift */,
 				B5EF70D9209BB0FC00F4F498 /* Assets.xcassets */,
 				B5EF70DB209BB0FC00F4F498 /* LaunchScreen.storyboard */,
 				B5EF70DE209BB0FC00F4F498 /* Info.plist */,
@@ -212,7 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5EF70E7209BB6F700F4F498 /* RecipesViewController.swift in Sources */,
-				B52B1371218110ED009FB91E /* EditingViewController.swift in Sources */,
+				B5ECC7EF21BB1BB9007CEDB5 /* EditingViewController.swift in Sources */,
 				B53DDA5820E14FB400DD82DF /* RegisterViewController.swift in Sources */,
 				B5EF70D8209BB0F900F4F498 /* TestKitchen.xcdatamodeld in Sources */,
 				B546441421403F20009C9150 /* SettingsTableViewController.swift in Sources */,

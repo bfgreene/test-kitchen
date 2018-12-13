@@ -356,7 +356,7 @@
                     <navigationItem key="navigationItem" title="Test Kitchen" id="RHA-OJ-cn1">
                         <barButtonItem key="backBarButtonItem" title=" " id="5oJ-fs-jtd"/>
                         <barButtonItem key="leftBarButtonItem" title="Settings" image="icons8-settings-40" id="lKs-XT-gQ4">
-                            <color key="tintColor" red="1" green="0.63137254899999995" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="dIo-hU-PaW" kind="show" id="0dl-Ir-dQF"/>
                             </connections>
@@ -447,7 +447,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSe-Hn-5tm">
                                             <rect key="frame" x="115" y="10.666666666666664" width="184" height="39"/>
-                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                            <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="30"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -469,14 +469,58 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="149.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sourd" translatesAutoresizingMaskIntoConstraints="NO" id="bwF-8b-xk5">
-                                            <rect key="frame" x="16" y="11" width="343" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aif-QA-EZW">
+                                            <rect key="frame" x="42" y="10" width="330" height="129.66666666666666"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhH-Y8-e4D">
+                                            <rect key="frame" x="157" y="24.666666666666671" width="100" height="100"/>
+                                            <color key="backgroundColor" red="0.3429679274559021" green="0.61764049530029297" blue="0.68042278289794922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="YhH-Y8-e4D" secondAttribute="height" multiplier="1:1" id="4qn-si-5vu"/>
+                                                <constraint firstAttribute="height" constant="100" id="90e-yK-J9u"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDq-XR-Sa5">
+                                            <rect key="frame" x="165" y="32" width="85" height="85"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="85" id="4dg-Wo-2dT"/>
+                                                <constraint firstAttribute="width" secondItem="gDq-XR-Sa5" secondAttribute="height" multiplier="1:1" id="zxn-D9-rOH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                            <state key="normal" title="Add Photo">
+                                                <color key="titleColor" red="0.3429679274559021" green="0.61764049530029297" blue="0.68042278289794922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="addPhotoButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="R0M-0p-3He"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="1" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTo-qE-Wbi">
+                                            <rect key="frame" x="380" y="119" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <state key="normal" title="Photo Settings Button" image="icons8-settings-40"/>
+                                            <connections>
+                                                <action selector="addPhotoButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="eMQ-f6-f2Y"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="aif-QA-EZW" secondAttribute="trailing" constant="42" id="78M-Nq-zjc"/>
+                                        <constraint firstAttribute="bottom" secondItem="aif-QA-EZW" secondAttribute="bottom" constant="10" id="DlP-41-3bO"/>
+                                        <constraint firstItem="aif-QA-EZW" firstAttribute="leading" secondItem="bJd-Vs-rvN" secondAttribute="leading" constant="42" id="GVX-4G-yjR"/>
+                                        <constraint firstItem="YhH-Y8-e4D" firstAttribute="centerY" secondItem="bJd-Vs-rvN" secondAttribute="centerY" id="HZw-yh-Vlt"/>
+                                        <constraint firstItem="gDq-XR-Sa5" firstAttribute="centerX" secondItem="bJd-Vs-rvN" secondAttribute="centerX" id="mrQ-Re-xJY"/>
+                                        <constraint firstItem="YhH-Y8-e4D" firstAttribute="centerX" secondItem="bJd-Vs-rvN" secondAttribute="centerX" id="v76-a0-4B1"/>
+                                        <constraint firstItem="aif-QA-EZW" firstAttribute="top" secondItem="bJd-Vs-rvN" secondAttribute="top" constant="10" id="vdJ-8d-EfY"/>
+                                        <constraint firstItem="gDq-XR-Sa5" firstAttribute="centerY" secondItem="bJd-Vs-rvN" secondAttribute="centerY" id="zUC-dZ-iuq"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="recipeImage" destination="bwF-8b-xk5" id="GNN-Tt-uKG"/>
+                                    <outlet property="addPhotoButton" destination="gDq-XR-Sa5" id="Uvn-8U-PSz"/>
+                                    <outlet property="backgroundAddButton" destination="YhH-Y8-e4D" id="gZ4-Tj-Osl"/>
+                                    <outlet property="backgroundImageView" destination="aif-QA-EZW" id="eHa-uD-R0J"/>
+                                    <outlet property="photoSettingsButton" destination="cTo-qE-Wbi" id="gY7-Qt-WmX"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="45" id="PTT-E4-iwU" customClass="HeaderCell" customModule="TestKitchen" customModuleProvider="target">
@@ -489,7 +533,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ingredients / Directions / Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkj-8l-drQ">
                                             <rect key="frame" x="13" y="0.0" width="308" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -557,13 +601,14 @@
                                             <rect key="frame" x="16" y="5" width="390" height="33.666666666666664"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-Sz-jAr">
-                                                    <rect key="frame" x="0.0" y="1.6666666666666679" width="352" height="30"/>
+                                                    <rect key="frame" x="0.0" y="2" width="352" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A3-Jp-brn">
-                                                    <rect key="frame" x="360" y="1.6666666666666679" width="30" height="30"/>
+                                                    <rect key="frame" x="360" y="2" width="30" height="30"/>
+                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
                                                         <action selector="addItemButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="Ebn-gs-rbA"/>
@@ -601,7 +646,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMF-Ca-WSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2168.8000000000002" y="112.89355322338831"/>
+            <point key="canvasLocation" x="2166.666666666667" y="112.50000000000001"/>
         </scene>
         <!--Editing View Controller-->
         <scene sceneID="1Py-Ik-6SO">
@@ -635,7 +680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPD-rR-sjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2853.5999999999999" y="104.7976011994003"/>
+            <point key="canvasLocation" x="2929" y="524"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MS6-Hq-WRr">
@@ -645,9 +690,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="D9h-tD-Lf1">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="35"/>
-                            <color key="textColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="24"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -688,10 +734,10 @@
                                 <rect key="frame" x="0.0" y="368" width="414" height="368"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oGj-9L-tkp">
-                                        <rect key="frame" x="69" y="109" width="277" height="150"/>
+                                        <rect key="frame" x="69.333333333333343" y="109" width="276.66666666666663" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-Wu-JB4">
-                                                <rect key="frame" x="41.333333333333357" y="0.0" width="193.66666666666663" height="68"/>
+                                                <rect key="frame" x="41.666666666666671" y="0.0" width="193.66666666666663" height="68"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="b@g.com" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJD-nA-1If">
                                                         <rect key="frame" x="0.0" y="0.0" width="193.66666666666666" height="30"/>
@@ -708,7 +754,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBj-ED-ICt">
-                                                <rect key="frame" x="93.666666666666686" y="68" width="89" height="44"/>
+                                                <rect key="frame" x="94" y="68" width="89" height="44"/>
                                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="24"/>
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" red="1" green="0.63107443669999996" blue="0.68189656259999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -867,7 +913,6 @@
     <resources>
         <image name="TK-Logo-1024" width="1025" height="1039"/>
         <image name="icons8-settings-40" width="40" height="40"/>
-        <image name="sourd" width="2323" height="2323"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Sa7-tP-W6B"/>

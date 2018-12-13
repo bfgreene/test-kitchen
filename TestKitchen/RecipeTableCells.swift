@@ -16,7 +16,10 @@ class TitleCell: UITableViewCell {
 
 class ImageCell: UITableViewCell {
     
-    @IBOutlet var recipeImage: UIImageView!
+    @IBOutlet var addPhotoButton: UIButton!
+    @IBOutlet var backgroundAddButton: UIButton!
+    @IBOutlet var photoSettingsButton: UIButton!
+    @IBOutlet var backgroundImageView: UIImageView!
 }
 
 class HeaderCell: UITableViewCell {
