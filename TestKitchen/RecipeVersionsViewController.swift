@@ -41,6 +41,15 @@ class RecipeVersionsViewController: UITableViewController {
 
     
     
+    @IBAction func favoriteButtonPressed(_ sender: Any) {
+        //get row of selected item
+        //change the favorited bool property of that recipe version
+        //switch the bg image to the filled/unfilled star
+        if let btn = sender as? UIButton {
+            btn.setImage(UIImage(named: "heart-outline-50"), for: .normal)
+        }
+    }
+    
     @IBAction func addVersionButtonPressed(_ sender: Any) {
         promptForVersionName(reprompt: false)
     }
@@ -141,4 +150,5 @@ class RecipeVersionsViewController: UITableViewController {
 
 class RecipeVersionCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var favoriteButton: UIButton!
 }

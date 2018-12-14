@@ -388,11 +388,19 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPz-qc-YQH">
                                             <rect key="frame" x="16" y="8" width="382" height="52"/>
-                                            <color key="backgroundColor" red="0.9645113032" green="0.69577440349999997" blue="0.63097565649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.96470588235294119" green="0.69411764705882351" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xf-ZW-ZsV">
+                                            <rect key="frame" x="352" y="17" width="35" height="35"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="heart-filled-50"/>
+                                            <connections>
+                                                <action selector="favoriteButtonPressed:" destination="qu8-Ij-MnT" eventType="touchUpInside" id="s2q-cw-7Cn"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="FPz-qc-YQH" firstAttribute="top" secondItem="CI3-f6-UhF" secondAttribute="top" constant="8" id="Scl-Xn-1kb"/>
@@ -402,6 +410,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="favoriteButton" destination="9xf-ZW-ZsV" id="Sux-Zz-Ayf"/>
                                     <outlet property="nameLabel" destination="FPz-qc-YQH" id="P0v-BF-awE"/>
                                     <segue destination="ndL-O6-JKm" kind="show" identifier="segueToRecipeDetails" id="Y2A-gy-Olh"/>
                                 </connections>
@@ -427,7 +436,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P47-ZJ-DDZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1357.5999999999999" y="112.89355322338831"/>
+            <point key="canvasLocation" x="1356.521739130435" y="112.50000000000001"/>
         </scene>
         <!--Recipe Details View Controller-->
         <scene sceneID="Jf7-d8-BgR">
@@ -680,7 +689,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPD-rR-sjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2929" y="524"/>
+            <point key="canvasLocation" x="2933" y="113"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MS6-Hq-WRr">
@@ -912,6 +921,7 @@
     </scenes>
     <resources>
         <image name="TK-Logo-1024" width="1025" height="1039"/>
+        <image name="heart-filled-50" width="50" height="50"/>
         <image name="icons8-settings-40" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
