@@ -31,6 +31,9 @@ class RecipeVersionsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "versionCell") as! RecipeVersionCell
         cell.nameLabel.text = allVersions[indexPath.row]["version_name"] as? String
+        let isFavorite = allVersions[indexPath.row]["is_favorite"] as? Bool ?? false
+        cell.favoriteButton.setImage(getFavoriteImage(withValue: isFavorite), for: .normal)
+        cell.favoriteButton.tag = indexPath.row
         return cell
     }
     
@@ -39,16 +42,37 @@ class RecipeVersionsViewController: UITableViewController {
     }
     
 
-    
-    
+    /**
+     *  Changes the 'is_favorite' property of recipe and saves to database
+     *  Displays proper favorite image
+     */
     @IBAction func favoriteButtonPressed(_ sender: Any) {
-        //get row of selected item
-        //change the favorited bool property of that recipe version
-        //switch the bg image to the filled/unfilled star
-        if let btn = sender as? UIButton {
-            btn.setImage(UIImage(named: "heart-outline-50"), for: .normal)
+        //TODO: change ui constaints so title doesn't overlap heart button
+        if let selectedButton = sender as? UIButton {
+            let indexPath = IndexPath(row: selectedButton.tag, section: 0)
+            let dataStore = backendless.data.ofTable("Recipe")
+            let cell = tableView.cellForRow(at: indexPath) as? RecipeVersionCell
+            var selectedRecord = allVersions[indexPath.row]
+            if let currentValue = selectedRecord["is_favorite"] as? Bool {
+                selectedRecord["is_favorite"] = !currentValue
+                allVersions[indexPath.row] = selectedRecord
+                dataStore?.save(selectedRecord,
+                                response: {
+                                    (updatedRecord) -> () in
+                                    let record = updatedRecord as! [String : Any]
+                                    if let isFavorite = record["is_favorite"] as? Bool {
+                                        cell?.favoriteButton.setImage(self.getFavoriteImage(withValue: isFavorite), for: .normal)
+                                    }
+                                    print("Favorite saved")
+                },
+                                error: {
+                                    (fault : Fault?) -> () in
+                                    print("Server reported an error: \(fault ?? Fault())")
+                })
+            }
         }
     }
+    
     
     @IBAction func addVersionButtonPressed(_ sender: Any) {
         promptForVersionName(reprompt: false)
@@ -90,6 +114,7 @@ class RecipeVersionsViewController: UITableViewController {
     
     func saveNewVersion(withVersionName versionName: String) {
         //TODO: make option to make new version based off specific existing version? come up with way to not use indexing in case all versions deleted
+        //^^ could do this with button in the recipe details of one they want to base off of
         let recipe = ["course": self.allVersions[0]["course"],
                       "dish_name" : self.allVersions[0]["dish_name"],
                       "user_id" : self.allVersions[0]["user_id"],
@@ -136,6 +161,9 @@ class RecipeVersionsViewController: UITableViewController {
         })
     }
     
+    func getFavoriteImage(withValue val: Bool) -> UIImage {
+        return val ? #imageLiteral(resourceName: "heart-filled-50") : #imageLiteral(resourceName: "heart-outline-50")
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipeDetails" {

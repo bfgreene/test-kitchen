@@ -12,7 +12,6 @@ class RecipesViewController: UITableViewController {
     
     
     var menuIndex = 0
-    let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] //put in constants file or something
     @IBOutlet var recipesTableView: UITableView!
     var allRecipes = [[String : Any]]()
     var uniqueDishes = [String]()
@@ -24,7 +23,7 @@ class RecipesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = courseNames[menuIndex]
+        self.title = Constants.courseNames[menuIndex]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +36,6 @@ class RecipesViewController: UITableViewController {
     }
     
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeCell
         cell.nameLabel.text = uniqueDishes[indexPath.row]
         return cell
@@ -58,9 +56,8 @@ class RecipesViewController: UITableViewController {
     
     func loadDishes() {
         let activityIndicator = createActivityIndicator()
-        
         currentUserId = backendless.userService.currentUser.email as String
-        let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
+        let whereClause = "user_id = '\(currentUserId)' and course = '\(Constants.courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
         queryBuilder!.setSortBy(["created"])
@@ -119,7 +116,7 @@ class RecipesViewController: UITableViewController {
     
     
     func saveNewDish(withDishName dishName: String) {
-        let recipe = ["course" : self.courseNames[self.menuIndex],
+        let recipe = ["course" : Constants.courseNames[self.menuIndex],
                       "dish_name": dishName,
                       "version_name": "Original",
                       "user_id" : self.currentUserId] as [String : Any]

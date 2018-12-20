@@ -508,7 +508,7 @@
                                         <button opaque="NO" tag="1" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTo-qE-Wbi">
                                             <rect key="frame" x="380" y="119" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <state key="normal" title="Photo Settings Button" image="icons8-settings-40"/>
+                                            <state key="normal" title="Photo Settings Button" image="icons8-pencil-50"/>
                                             <connections>
                                                 <action selector="addPhotoButtonPressed:" destination="ndL-O6-JKm" eventType="touchUpInside" id="eMQ-f6-f2Y"/>
                                             </connections>
@@ -922,6 +922,7 @@
     <resources>
         <image name="TK-Logo-1024" width="1025" height="1039"/>
         <image name="heart-filled-50" width="50" height="50"/>
+        <image name="icons8-pencil-50" width="50" height="50"/>
         <image name="icons8-settings-40" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>

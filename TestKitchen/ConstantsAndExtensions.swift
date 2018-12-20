@@ -21,5 +21,5 @@ extension UIViewController {
 }
 
 struct Constants {
-    
+    static let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] 
 }
