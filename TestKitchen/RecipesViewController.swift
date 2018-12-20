@@ -24,29 +24,17 @@ class RecipesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadDishes()
+        self.title = courseNames[menuIndex]
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        loadDishes() //trying here to get spinner to show
+        loadDishes()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numDishes = uniqueDishes.count
-        if numDishes == 0 {
-            //TODO: change to "no recipes!".. make square, centered, doesn't flash before first load(doesn't show at at all if there are recipes but just haven't loaded yet
-            recipesTableView.backgroundView = UIImageView(image: UIImage(named: "NoRecipes"))
-            recipesTableView.backgroundView?.contentMode = .scaleAspectFit
-        } else {
-            recipesTableView.backgroundView = nil
-        }
         return uniqueDishes.count
-        
     }
-    
-    
     
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -69,10 +57,7 @@ class RecipesViewController: UITableViewController {
     
     
     func loadDishes() {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activityIndicator.center = self.view.center
-        self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
+        let activityIndicator = createActivityIndicator()
         
         currentUserId = backendless.userService.currentUser.email as String
         let whereClause = "user_id = '\(currentUserId)' and course = '\(courseNames[menuIndex])'"
@@ -93,6 +78,10 @@ class RecipesViewController: UITableViewController {
                             }
                             self.recipesTableView.reloadData()
                             activityIndicator.removeFromSuperview()
+                            if foundRecipes?.count == 0 {
+                                self.recipesTableView.backgroundView = UIImageView(image: UIImage(named: "NoRecipes"))
+                                self.recipesTableView.backgroundView?.contentMode = .scaleAspectFit
+                            }
 
         },
                         error: {

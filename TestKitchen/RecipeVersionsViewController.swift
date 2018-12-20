@@ -113,6 +113,7 @@ class RecipeVersionsViewController: UITableViewController {
     
     
     func loadVersions(){
+        let activityIndicator = createActivityIndicator()
         let whereClause = "user_id = '\(userId)' and dish_name = '\(dishName)'"
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
@@ -126,10 +127,12 @@ class RecipeVersionsViewController: UITableViewController {
                             DispatchQueue.main.async {
                                 self.versionsTable.reloadData()
                             }
+                            activityIndicator.removeFromSuperview()
         },
                         error: {
                             (fault : Fault?) -> () in
                             print("Server reported an error: \(fault ?? Fault()) ")
+                            activityIndicator.removeFromSuperview()
         })
     }
     
