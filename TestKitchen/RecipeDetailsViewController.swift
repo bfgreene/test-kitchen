@@ -235,6 +235,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             dishImage = chosenImage
+            saveImage(img: chosenImage)
             DispatchQueue.main.async {
                 self.recipeTable.reloadData()
             }
@@ -243,7 +244,17 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     }
     
     
-    
+    func saveImage(img: UIImage) {
+        let imgFile = UIImageJPEGRepresentation(img, 1)
+        let filePath = "images/img_\(Date().timeIntervalSince1970).jpg" //maybe add username in here
+       
+        backendless?.file.saveFile(filePath, content: imgFile, response: { (file: BackendlessFile?) in
+            print("uploaded file: \(String(describing: file))")
+        }, error: { (fault: Fault?) in
+            //failedupload
+            print("upload failed")
+        })
+    }
     
     
     
