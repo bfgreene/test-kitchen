@@ -17,6 +17,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     var directions = [String]()
     var notes = String()
     var dishImage: UIImage?
+    var imagePath: String?
     var directionsHeaderIndex, notesHeaderIndex, addIngredientIndex, addDirectionIndex, firstIngredientIndex, firstDirectionIndex : Int!
  
 
@@ -35,7 +36,11 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
 
         ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
+        imagePath = recipe["image_path"] as? String
         notes = recipe["notes"] as? String ?? ""
+        if let path = imagePath {
+            getImage(withURL: path)
+        }
        
         updateReferenceIndicies()
         setupUI()
@@ -57,7 +62,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         case 0:
             height = 60
         case 1:
-            height = dishImage != nil ? 400 : 150
+            height = imagePath != nil ? 400 : 150
         default:
             height = UITableViewAutomaticDimension
         }
@@ -83,6 +88,9 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
                 cell.backgroundImageView.image = img
                 cell.addPhotoButton.isHidden = true
                 cell.backgroundAddButton.isHidden = true
+                cell.contentView.sendSubview(toBack: cell.backgroundImageView)
+                cell.photoSettingsButton.clipsToBounds = true
+                cell.photoSettingsButton.layer.cornerRadius = 5
             } else {
                 cell.addPhotoButton.isHidden = false
                 cell.backgroundAddButton.isHidden = false
@@ -148,7 +156,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         recipe["notes"] = notes
-        //recipe["image_path] = someImagePath
+        recipe["image_path"] = imagePath
         
         dataStore?.save(recipe,
                         response: {
@@ -249,7 +257,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         let filePath = "images/img_\(Date().timeIntervalSince1970).jpg" //maybe add username in here
        
         backendless?.file.saveFile(filePath, content: imgFile, response: { (file: BackendlessFile?) in
-            print("uploaded file: \(String(describing: file))")
+            self.imagePath = file?.fileURL
+            self.saveRecipe()
         }, error: { (fault: Fault?) in
             //failedupload
             print("upload failed")
@@ -257,6 +266,26 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     }
     
     
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async {
+                self.dishImage = UIImage(data: data)
+                self.recipeTable.reloadData()
+            }
+            
+        }
+    }
+    
+    func getImage(withURL url: String) {
+        if let fileURL = URL(string: url) {
+            downloadImage(from: fileURL)
+        }
+    }
     
     
     /*
