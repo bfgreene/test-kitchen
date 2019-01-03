@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
         if (!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!) {
             loginUser()
         } else {
-            //alert: must enter email and password fields
+            self.alert(withTitle: "Error", msg: "Please enter a valid email and password")
         }
     }
     
@@ -42,7 +42,7 @@ class SignInViewController: UIViewController {
         error: {
             (fault : Fault?) -> Void in
             print("Server reported an error: \(String(describing: fault?.description))")
-            //alert failed login ex) wrong password
+            self.alert(withTitle: "Error", msg: "Invalid login or password")
         })
     }
 

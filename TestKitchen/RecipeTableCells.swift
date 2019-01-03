@@ -20,6 +20,7 @@ class ImageCell: UITableViewCell {
     @IBOutlet var backgroundAddButton: UIButton!
     @IBOutlet var photoSettingsButton: UIButton!
     @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet var spinner: UIActivityIndicatorView!
 }
 
 class HeaderCell: UITableViewCell {

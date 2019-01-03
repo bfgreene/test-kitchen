@@ -18,6 +18,12 @@ extension UIViewController {
         return activityIndicator
     }
     
+    func alert(withTitle title: String, msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 struct Constants {

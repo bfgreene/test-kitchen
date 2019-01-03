@@ -25,8 +25,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     
     
     
-    
-    
     /**
      *  Grab recipe details from db
      *  Additional UI setup
@@ -62,7 +60,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         case 0:
             height = 60
         case 1:
-            height = imagePath != nil ? 400 : 150
+            let width = tableView.frame.width
+            height = imagePath != nil ? width : 150
         default:
             height = UITableViewAutomaticDimension
         }
@@ -72,7 +71,18 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     
     
     /**
-     *  Determine which custom cell to deque based on position in table
+     * Determine which custom cell to deque based on position in table
+     *
+     * Title
+     * Image
+     * Ingredients
+     * [Ingredient List]
+     * New Ingredient Input
+     * Directions
+     * [Direction List]
+     * New Direction Input
+     * Notes
+     * [Notes]
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         updateReferenceIndicies()
@@ -84,13 +94,16 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
             
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCell
-            if let img = dishImage {
-                cell.backgroundImageView.image = img
-                cell.addPhotoButton.isHidden = true
+            if imagePath != nil {
                 cell.backgroundAddButton.isHidden = true
-                cell.contentView.sendSubview(toBack: cell.backgroundImageView)
-                cell.photoSettingsButton.clipsToBounds = true
-                cell.photoSettingsButton.layer.cornerRadius = 5
+                cell.addPhotoButton.isHidden = true
+                cell.spinner.startAnimating()
+                if let img = dishImage {
+                    cell.backgroundImageView.image = img
+                    //cell.contentView.sendSubview(toBack: cell.backgroundImageView)
+                    cell.photoSettingsButton.clipsToBounds = true
+                    cell.photoSettingsButton.layer.cornerRadius = 5
+                }
             } else {
                 cell.addPhotoButton.isHidden = false
                 cell.backgroundAddButton.isHidden = false
