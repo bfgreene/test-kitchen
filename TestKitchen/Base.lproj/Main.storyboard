@@ -34,7 +34,7 @@
                                             <rect key="frame" x="20" y="8" width="374" height="57"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbU-sP-IoG">
-                                                    <rect key="frame" x="113.66666666666666" y="13.000000000000002" width="146.99999999999997" height="31.666666666666671"/>
+                                                    <rect key="frame" x="114" y="13.000000000000002" width="147" height="31.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="24"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -107,7 +107,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="9iT-jV-dcV" kind="show" id="A2g-Ma-zJ6"/>
+                                                        <segue destination="9iT-jV-dcV" kind="presentation" id="rRc-Ka-fc4"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -159,44 +159,70 @@
             </objects>
             <point key="canvasLocation" x="-148" y="-644.52773613193403"/>
         </scene>
-        <!--View Controller-->
+        <!--Developer Info View-->
         <scene sceneID="uhS-qI-28a">
             <objects>
-                <viewController id="9iT-jV-dcV" sceneMemberID="viewController">
+                <viewController id="9iT-jV-dcV" customClass="DeveloperInfoView" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8sX-Yc-XHW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="[Logo]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9t-yR-4Ax">
-                                <rect key="frame" x="127" y="187" width="121" height="121"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cJ6-RB-yOM">
+                                <rect key="frame" x="22.5" y="85" width="275.5" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.9645113032" green="0.69577440349999997" blue="0.63097565649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="contact us:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhC-aX-CRJ">
-                                <rect key="frame" x="144" y="388" width="86" height="21"/>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestKitchen-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="Wa6-t6-Nns">
+                                <rect key="frame" x="107" y="278" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="QUY-du-acV"/>
+                                    <constraint firstAttribute="width" constant="200" id="mON-ec-EQp"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JbS-oW-fjJ">
+                                <rect key="frame" x="69.666666666666686" y="488" width="275" height="45.666666666666629"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contact us:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhC-aX-CRJ">
+                                        <rect key="frame" x="95" y="0.0" width="85.333333333333314" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TestKitchenApp@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbp-3F-yfb">
+                                        <rect key="frame" x="9" y="20.333333333333314" width="257" height="25.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="Ygr-8h-mQ9"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGA-AV-GMJ">
+                                <rect key="frame" x="15" y="35" width="42" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TestKitchenApp@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbp-3F-yfb">
-                                <rect key="frame" x="51" y="388" width="272" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="40"/>
+                                <state key="normal" title="x">
+                                    <color key="titleColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismiss:" destination="9iT-jV-dcV" eventType="touchUpInside" id="gHT-5h-019"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JbS-oW-fjJ" firstAttribute="centerX" secondItem="RSN-0Z-gXP" secondAttribute="centerX" id="4BI-Lb-tSL"/>
+                            <constraint firstItem="JbS-oW-fjJ" firstAttribute="top" secondItem="Wa6-t6-Nns" secondAttribute="bottom" constant="10" id="M2w-ar-7f0"/>
+                            <constraint firstItem="Wa6-t6-Nns" firstAttribute="centerX" secondItem="RSN-0Z-gXP" secondAttribute="centerX" id="jec-vJ-m3p"/>
+                            <constraint firstItem="Wa6-t6-Nns" firstAttribute="centerY" secondItem="RSN-0Z-gXP" secondAttribute="centerY" id="qJG-PR-dJm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="RSN-0Z-gXP"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpc-Sl-d2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592.79999999999995" y="-645.42728635682158"/>
+            <point key="canvasLocation" x="592.75362318840587" y="-645.6521739130435"/>
         </scene>
         <!--Menu-->
         <scene sceneID="oO5-cI-r1E">
@@ -355,7 +381,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Test Kitchen" id="RHA-OJ-cn1">
                         <barButtonItem key="backBarButtonItem" title=" " id="5oJ-fs-jtd"/>
-                        <barButtonItem key="leftBarButtonItem" title="Settings" image="icons8-settings-40" id="lKs-XT-gQ4">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="icons8-settings-40" id="lKs-XT-gQ4">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="dIo-hU-PaW" kind="show" id="0dl-Ir-dQF"/>
@@ -623,13 +649,13 @@
                                             <rect key="frame" x="16" y="5" width="390" height="33.666666666666664"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-Sz-jAr">
-                                                    <rect key="frame" x="0.0" y="2" width="352" height="30"/>
+                                                    <rect key="frame" x="0.0" y="1.6666666666666679" width="352" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A3-Jp-brn">
-                                                    <rect key="frame" x="360" y="2" width="30" height="30"/>
+                                                    <rect key="frame" x="360" y="1.6666666666666679" width="30" height="30"/>
                                                     <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
@@ -738,7 +764,7 @@
                             <view contentMode="scaleToFill" restorationIdentifier="viewTop" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-sx-Ght">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="368.66666666666669"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="TK-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-es-yhB">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="TestKitchen-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-es-yhB">
                                         <rect key="frame" x="104" y="81" width="207" height="207"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MdC-es-yhB" secondAttribute="height" multiplier="1:1" id="zHz-ik-82Z"/>
@@ -756,19 +782,19 @@
                                 <rect key="frame" x="0.0" y="368" width="414" height="368"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oGj-9L-tkp">
-                                        <rect key="frame" x="69.333333333333343" y="109" width="276.66666666666663" height="150"/>
+                                        <rect key="frame" x="68.666666666666657" y="109" width="276.66666666666674" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-Wu-JB4">
-                                                <rect key="frame" x="41.666666666666671" y="0.0" width="193.66666666666663" height="68"/>
+                                                <rect key="frame" x="41.333333333333314" y="0.0" width="194" height="68"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="b@g.com" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJD-nA-1If">
-                                                        <rect key="frame" x="0.0" y="0.0" width="193.66666666666666" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="194" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bgc-kU-5WA">
-                                                        <rect key="frame" x="0.0" y="38" width="193.66666666666666" height="30"/>
+                                                        <rect key="frame" x="0.0" y="38" width="194" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -819,7 +845,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lK8-Y8-FvB" firstAttribute="bottom" secondItem="qK3-ST-BwD" secondAttribute="bottom" id="0Ix-tB-aEB"/>
                             <constraint firstItem="Evi-sx-Ght" firstAttribute="leading" secondItem="NCT-Ss-3ZG" secondAttribute="leading" id="136-mJ-PAn"/>
@@ -933,12 +958,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TK-Logo-1024" width="1025" height="1039"/>
+        <image name="TestKitchen-Logo-1024" width="1024" height="1024"/>
         <image name="heart-filled-50" width="50" height="50"/>
         <image name="icons8-pencil-50" width="50" height="50"/>
         <image name="icons8-settings-40" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oOe-SE-4ib"/>
+        <segue reference="Sa7-tP-W6B"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,20 +12,6 @@ class SettingsTableViewController: UITableViewController {
 
     let backendless = Backendless.sharedInstance()!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
     @IBAction func logOutButtonPressed(_ sender: Any) {
         backendless.userService.logout({
             (result : Any?) -> Void in
@@ -37,8 +23,14 @@ class SettingsTableViewController: UITableViewController {
                                         print("Server reported an error: \(String(describing: fault?.description))")
         })
     }
-    
-    
+
+}
 
 
+class DeveloperInfoView: UIViewController {
+    
+    @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
