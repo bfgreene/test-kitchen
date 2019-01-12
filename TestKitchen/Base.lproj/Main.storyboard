@@ -81,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="666.39999999999998" y="106.59670164917542"/>
         </scene>
-        <!--Settings Table View Controller-->
+        <!--Settings-->
         <scene sceneID="8Xz-tW-a8i">
             <objects>
-                <tableViewController id="dIo-hU-PaW" customClass="SettingsTableViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="dIo-hU-PaW" customClass="SettingsTableViewController" customModule="TestKitchen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KgF-ll-QMf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,8 +92,35 @@
                         <sections>
                             <tableViewSection id="Q2B-oA-lES">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="KhW-NG-FOZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="PZG-oT-Uxo">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZG-oT-Uxo" id="IVT-Ar-VoT">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9F-Na-QVP">
+                                                    <rect key="frame" x="16" y="8" width="382" height="57"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="19"/>
+                                                    <state key="normal" title="Log Out">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="logOutButtonPressed:" destination="dIo-hU-PaW" eventType="touchUpInside" id="2fD-uM-Ieb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="X9F-Na-QVP" secondAttribute="bottom" id="7k1-X1-Lss"/>
+                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="top" secondItem="IVT-Ar-VoT" secondAttribute="top" constant="8" id="IFF-wS-o5o"/>
+                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="leading" secondItem="IVT-Ar-VoT" secondAttribute="leading" constant="16" id="Y6w-oJ-1QT"/>
+                                                <constraint firstAttribute="trailing" secondItem="X9F-Na-QVP" secondAttribute="trailing" constant="16" id="YSS-7P-ueh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="KhW-NG-FOZ">
+                                        <rect key="frame" x="0.0" y="65" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KhW-NG-FOZ" id="uA5-ZS-mQc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
@@ -119,30 +146,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="PZG-oT-Uxo">
-                                        <rect key="frame" x="0.0" y="65" width="414" height="65"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="lKV-Rx-rbO">
+                                        <rect key="frame" x="0.0" y="130" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZG-oT-Uxo" id="IVT-Ar-VoT">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lKV-Rx-rbO" id="20g-Du-4LQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9F-Na-QVP">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7N-ms-CPG">
                                                     <rect key="frame" x="16" y="8" width="382" height="57"/>
-                                                    <color key="backgroundColor" red="1" green="0.44880160851772732" blue="0.42864666327431955" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.4488016085" blue="0.42864666330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="19"/>
-                                                    <state key="normal" title="Log Out">
+                                                    <state key="normal" title="Delete Account">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="logOutButtonPressed:" destination="dIo-hU-PaW" eventType="touchUpInside" id="2fD-uM-Ieb"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="X9F-Na-QVP" secondAttribute="bottom" id="7k1-X1-Lss"/>
-                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="top" secondItem="IVT-Ar-VoT" secondAttribute="top" constant="8" id="IFF-wS-o5o"/>
-                                                <constraint firstItem="X9F-Na-QVP" firstAttribute="leading" secondItem="IVT-Ar-VoT" secondAttribute="leading" constant="16" id="Y6w-oJ-1QT"/>
-                                                <constraint firstAttribute="trailing" secondItem="X9F-Na-QVP" secondAttribute="trailing" constant="16" id="YSS-7P-ueh"/>
+                                                <constraint firstAttribute="bottom" secondItem="L7N-ms-CPG" secondAttribute="bottom" id="FQj-yO-UHM"/>
+                                                <constraint firstItem="L7N-ms-CPG" firstAttribute="leading" secondItem="20g-Du-4LQ" secondAttribute="leading" constant="16" id="HSc-ys-1hl"/>
+                                                <constraint firstAttribute="trailing" secondItem="L7N-ms-CPG" secondAttribute="trailing" constant="16" id="qfZ-mq-XT0"/>
+                                                <constraint firstItem="L7N-ms-CPG" firstAttribute="top" secondItem="20g-Du-4LQ" secondAttribute="top" constant="8" id="sBl-Fe-ioJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -167,10 +191,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cJ6-RB-yOM">
-                                <rect key="frame" x="22.5" y="85" width="275.5" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestKitchen-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="Wa6-t6-Nns">
                                 <rect key="frame" x="107" y="278" width="200" height="200"/>
                                 <constraints>
@@ -202,12 +222,20 @@
                                 <rect key="frame" x="15" y="35" width="42" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="40"/>
-                                <state key="normal" title="x">
+                                <state key="normal" title="x ⓧ">
                                     <color key="titleColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="dismiss:" destination="9iT-jV-dcV" eventType="touchUpInside" id="gHT-5h-019"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCW-CL-mrr">
+                                <rect key="frame" x="55" y="49" width="51" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="ⓧ">
+                                    <color key="titleColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -507,7 +535,7 @@
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fcv-by-CQg">
                                             <rect key="frame" x="197" y="65" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aif-QA-EZW">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aif-QA-EZW">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhH-Y8-e4D">
@@ -740,7 +768,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="28"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>

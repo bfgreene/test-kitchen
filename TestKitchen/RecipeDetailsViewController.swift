@@ -150,11 +150,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-            if notes == "" {
-                //add placeholder text
-            } else {
-                cell.contentLabel.text = notes
-            }
+            cell.contentLabel.text = notes
             return cell
         }
         
@@ -337,12 +333,14 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // TODO: Make constants for indexes
+            // TODO: update numbers of directions if direction deleted
             if indexPath.row < ingredients.count + 3 {
                 ingredients.remove(at: (indexPath.row-3))
             } else {
                 directions.remove(at: (indexPath.row-ingredients.count-5))
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
+            recipeTable.reloadData() //added to renumber directions upon deletion
         }
     }
     
