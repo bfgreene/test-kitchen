@@ -31,7 +31,7 @@ class SignInViewController: UIViewController {
      * Segue if login succeeds
      * Present alert if login fails
     */
-    func loginUser () {
+    func loginUser() {
         backendless.userService.login(emailField.text, password: passwordField.text,
         response: {
             (loggedUser : BackendlessUser?) -> Void in
