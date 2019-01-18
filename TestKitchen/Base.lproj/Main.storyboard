@@ -160,6 +160,9 @@
                                                     <state key="normal" title="Delete Account">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="deleteAccountButtonPressed:" destination="dIo-hU-PaW" eventType="touchUpInside" id="dEl-5T-nNf"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -677,13 +680,13 @@
                                             <rect key="frame" x="16" y="5" width="390" height="33.666666666666664"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-Sz-jAr">
-                                                    <rect key="frame" x="0.0" y="1.6666666666666679" width="352" height="30"/>
+                                                    <rect key="frame" x="0.0" y="2" width="352" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A3-Jp-brn">
-                                                    <rect key="frame" x="360" y="1.6666666666666679" width="30" height="30"/>
+                                                    <rect key="frame" x="360" y="2" width="30" height="30"/>
                                                     <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>

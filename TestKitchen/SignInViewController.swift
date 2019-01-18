@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
         if (!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!) {
             loginUser()
         } else {
-            self.alert(withTitle: "Error", msg: "Please enter a valid email and password")
+            self.alert(withTitle: "Error", msg: "Invalid email or password")
         }
     }
     
@@ -35,14 +35,12 @@ class SignInViewController: UIViewController {
         backendless.userService.login(emailField.text, password: passwordField.text,
         response: {
             (loggedUser : BackendlessUser?) -> Void in
-            print("User logged in")
             self.passwordField.text = ""
             self.performSegue(withIdentifier: "signInSegue", sender: self)
         },
         error: {
             (fault : Fault?) -> Void in
-            print("Server reported an error: \(String(describing: fault?.description))")
-            self.alert(withTitle: "Error", msg: "Invalid login or password")
+            self.alert(withTitle: "Error", msg: "Invalid email or password")
         })
     }
 
