@@ -43,6 +43,63 @@ class RecipesViewController: UITableViewController {
 
     
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: .normal, title: "Rename") { action, index in
+            //prompt for new name
+            print("rename button tapped")
+        }
+        rename.backgroundColor = .lightGray
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            //prompt for delete confirmation
+            print("delete button tapped")
+        }
+        delete.backgroundColor = .red
+        
+        
+        return [delete, rename]
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func deleteDish() {
+       
+    }
+    
+    
+    func promptForDishName(withTitle title: String, msg: String, rename: Bool, reprompt: Bool) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        
+        if reprompt { alert.title? = "Please enter a unique name" }
+        
+        alert.addTextField()
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert!.textFields![0]
+            
+            //reprompt if dish with that name exists
+            if let dishName = textField.text, self.uniqueDishes.contains(dishName) {
+                self.promptForDishName(withTitle: title, msg: msg, rename: rename, reprompt: true)
+            } else if !rename {
+                self.saveNewDish(withDishName: textField.text ?? "New Dish")
+            } else {
+                //rename dish & update
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    func renameDish() {
+        
+    }
+    
+    
     /**
      *  Create new Recipe based on user input from alert
      *  Save to backendless db
@@ -51,8 +108,6 @@ class RecipesViewController: UITableViewController {
     @IBAction func addRecipeButtonPressed(_ sender: Any) {
         promptForDishName(false)
     }
-    
-    
     
     func loadDishes() {
         let activityIndicator = createActivityIndicator()
@@ -78,6 +133,8 @@ class RecipesViewController: UITableViewController {
                             if foundRecipes?.count == 0 {
                                 self.recipesTableView.backgroundView = UIImageView(image: UIImage(named: "NoRecipes"))
                                 self.recipesTableView.backgroundView?.contentMode = .scaleAspectFit
+                            } else {
+                                self.recipesTableView.backgroundView = UIImageView()
                             }
 
         },
@@ -124,7 +181,6 @@ class RecipesViewController: UITableViewController {
         dataStore!.save(recipe,
                         response: {
                             (recipe) -> () in
-                            print("Recipe saved")
                             //segue to versions
                             self.loadDishes()
                             self.recipesTableView.reloadData()

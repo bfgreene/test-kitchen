@@ -20,7 +20,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     var imagePath: String?
     var directionsHeaderIndex, notesHeaderIndex, addIngredientIndex, addDirectionIndex, firstIngredientIndex, firstDirectionIndex : Int!
  
-
     @IBOutlet var recipeTable: UITableView!
     
     

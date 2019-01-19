@@ -26,6 +26,8 @@ class RegisterViewController: UIViewController {
     @IBAction func registerButtonPressed(_ sender: Any) {
         if passwordField.text != passwordConfirmationField.text {
             alert(withTitle: "Error", msg: "Password fields do not match")
+            passwordField.text = ""
+            passwordConfirmationField.text = ""
         } else {
             registerUser()
         }
