@@ -45,16 +45,14 @@ class RecipesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let rename = UITableViewRowAction(style: .normal, title: "Rename") { action, index in
-            //prompt for new name
-            print("rename button tapped")
+            self.promptForDishName(withTitle: "Rename Dish", msg: "What would you like to rename this dish?", indexPath: indexPath, reprompt: false)
         }
-        rename.backgroundColor = .lightGray
+        rename.backgroundColor = UIColor(red: 0.725, green: 0.725, blue: 0.725, alpha: 1)
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
-            //prompt for delete confirmation
-            print("delete button tapped")
+            self.deleteDish()
         }
-        delete.backgroundColor = .red
+        delete.backgroundColor = UIColor(red: 1, green: 0.439, blue: 0.439, alpha: 1)
         
         
         return [delete, rename]
@@ -65,11 +63,12 @@ class RecipesViewController: UITableViewController {
     }
     
     func deleteDish() {
-       
+        //prompt for confirmation
+       print("in delete dish func")
     }
     
     
-    func promptForDishName(withTitle title: String, msg: String, rename: Bool, reprompt: Bool) {
+    func promptForDishName(withTitle title: String, msg: String, indexPath: IndexPath?, reprompt: Bool) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         if reprompt { alert.title? = "Please enter a unique name" }
@@ -80,11 +79,16 @@ class RecipesViewController: UITableViewController {
             
             //reprompt if dish with that name exists
             if let dishName = textField.text, self.uniqueDishes.contains(dishName) {
-                self.promptForDishName(withTitle: title, msg: msg, rename: rename, reprompt: true)
-            } else if !rename {
-                self.saveNewDish(withDishName: textField.text ?? "New Dish")
-            } else {
+                self.promptForDishName(withTitle: title, msg: msg, indexPath: indexPath, reprompt: true)
+            } else if let path = indexPath{
                 //rename dish & update
+                let cell = self.recipesTableView.cellForRow(at: path) as! RecipeCell
+                let oldName = cell.nameLabel.text ?? ""
+                self.updateDish(with: oldName, newName: textField.text ?? "", indexPath: path)
+            } else {
+                //new dish
+                self.saveNewDish(withDishName: textField.text ?? "New Dish")
+
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -107,17 +111,20 @@ class RecipesViewController: UITableViewController {
      */
     @IBAction func addRecipeButtonPressed(_ sender: Any) {
         promptForDishName(false)
+        //promptForDishName(withTitle: "New Dish", msg: "What is the name of the new dish?", indexPath: nil, reprompt: false)
     }
     
     func loadDishes() {
         let activityIndicator = createActivityIndicator()
         currentUserId = backendless.userService.currentUser.email as String
+        uniqueDishes = []
+        
         let whereClause = "user_id = '\(currentUserId)' and course = '\(Constants.courseNames[menuIndex])'"
         let queryBuilder = DataQueryBuilder()
         queryBuilder!.setWhereClause(whereClause)
         queryBuilder!.setSortBy(["created"])
-        
         let dataStore = self.backendless.data.ofTable("Recipe")
+        
         dataStore?.find(queryBuilder,
                         response: {
                             (foundRecipes) -> () in
@@ -128,8 +135,10 @@ class RecipesViewController: UITableViewController {
                                     self.uniqueDishes.append(dishName)
                                 }
                             }
+                            
                             self.recipesTableView.reloadData()
                             activityIndicator.removeFromSuperview()
+                            
                             if foundRecipes?.count == 0 {
                                 self.recipesTableView.backgroundView = UIImageView(image: UIImage(named: "NoRecipes"))
                                 self.recipesTableView.backgroundView?.contentMode = .scaleAspectFit
@@ -191,6 +200,22 @@ class RecipesViewController: UITableViewController {
         })
     }
     
+    func updateDish(with oldName: String, newName: String, indexPath: IndexPath) {
+        let spinner = createActivityIndicator()
+        let dataStore = self.backendless.data.ofTable("Recipe")
+        let changes = ["dish_name" : newName]
+        let whereClause = "user_id = '\(currentUserId)' and course = '\(Constants.courseNames[menuIndex])' and dish_name = '\(oldName)'"
+    
+        dataStore?.updateBulk(whereClause, changes: changes,
+            response: { (num) in
+                spinner.removeFromSuperview()
+                self.loadDishes()
+            }, error: { (fault) in
+                self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown error")
+                spinner.removeFromSuperview()
+        })
+
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
