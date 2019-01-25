@@ -47,12 +47,12 @@ class RecipesViewController: UITableViewController {
         let rename = UITableViewRowAction(style: .normal, title: "Rename") { action, index in
             self.promptForDishName(withTitle: "Rename Dish", msg: "What would you like to rename this dish?", indexPath: indexPath, reprompt: false)
         }
-        rename.backgroundColor = UIColor(red: 0.725, green: 0.725, blue: 0.725, alpha: 1)
+        rename.backgroundColor = UIColor(red: 0.725, green: 0.725, blue: 0.725, alpha: 1) //light grey
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
-            self.deleteDish()
+            self.deleteDish(atIndexPath: indexPath)
         }
-        delete.backgroundColor = UIColor(red: 1, green: 0.439, blue: 0.439, alpha: 1)
+        delete.backgroundColor = UIColor(red: 1, green: 0.439, blue: 0.439, alpha: 1) //pale red
         
         
         return [delete, rename]
@@ -62,9 +62,22 @@ class RecipesViewController: UITableViewController {
         return true
     }
     
-    func deleteDish() {
-        //prompt for confirmation
-       print("in delete dish func")
+    func deleteDish(atIndexPath indexPath: IndexPath) {
+        let cell = self.recipesTableView.cellForRow(at: indexPath) as! RecipeCell
+        let dishName = cell.nameLabel.text ?? ""
+        let alert = UIAlertController(title: "Delete \(dishName)?", message: "This action cannot be undone", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+            
+            let whereClause = "user_id = '\(self.currentUserId)' and course = '\(Constants.courseNames[self.menuIndex])' and dish_name = '\(dishName)'"
+            self.backendless.data.ofTable("Recipe").removeBulk(whereClause,
+                    response: { number in
+                        self.loadDishes()
+                    }, error: { fault in
+                        self.alert(withTitle: "Error", msg: fault?.message ?? "Unknown Error")
+                    })
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -84,7 +97,7 @@ class RecipesViewController: UITableViewController {
                 //rename dish & update
                 let cell = self.recipesTableView.cellForRow(at: path) as! RecipeCell
                 let oldName = cell.nameLabel.text ?? ""
-                self.updateDish(with: oldName, newName: textField.text ?? "", indexPath: path)
+                self.updateDish(with: oldName, newName: textField.text ?? "")
             } else {
                 //new dish
                 self.saveNewDish(withDishName: textField.text ?? "New Dish")
@@ -94,13 +107,6 @@ class RecipesViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-    
-    func renameDish() {
-        
     }
     
     
@@ -149,7 +155,7 @@ class RecipesViewController: UITableViewController {
         },
                         error: {
                             (fault : Fault?) -> () in
-                            print("Server reported an error: \(fault ?? Fault()) ")
+                            self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown error")
                             activityIndicator.removeFromSuperview()
 
         })
@@ -196,11 +202,11 @@ class RecipesViewController: UITableViewController {
         },
                         error: {
                             (fault : Fault?) -> () in
-                            print("Server reported an error: \(fault ?? Fault())")
+                            self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown error")
         })
     }
     
-    func updateDish(with oldName: String, newName: String, indexPath: IndexPath) {
+    func updateDish(with oldName: String, newName: String) {
         let spinner = createActivityIndicator()
         let dataStore = self.backendless.data.ofTable("Recipe")
         let changes = ["dish_name" : newName]
