@@ -24,6 +24,14 @@ class RecipeVersionsViewController: UITableViewController {
         loadVersions()
     }
     
+    
+    
+    /**
+     *
+     *
+     * MARK: TableView functions
+     *
+     */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allVersions.count
     }
@@ -40,6 +48,25 @@ class RecipeVersionsViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: .normal, title: "Rename") { action, index in
+            self.promptForVersionName(withTitle: "Rename Version", msg: "What would you like to rename this version?", indexPath: indexPath, reprompt: false)
+        }
+        rename.backgroundColor = UIColor(red: 0.725, green: 0.725, blue: 0.725, alpha: 1) //light grey
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            self.deleteVersion(atIndexPath: indexPath)
+        }
+        delete.backgroundColor = UIColor(red: 1, green: 0.439, blue: 0.439, alpha: 1) //pale red
+        
+        
+        return [delete, rename]
+    }
+    
+    
+    
+    
     
 
     /**
@@ -63,31 +90,41 @@ class RecipeVersionsViewController: UITableViewController {
                                     if let isFavorite = record["is_favorite"] as? Bool {
                                         cell?.favoriteButton.setImage(self.getFavoriteImage(withValue: isFavorite), for: .normal)
                                     }
-                                    print("Favorite saved")
                 },
                                 error: {
                                     (fault : Fault?) -> () in
-                                    print("Server reported an error: \(fault ?? Fault())")
+                                    self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown Error")
                 })
             }
         }
     }
-    
-    
-    @IBAction func addVersionButtonPressed(_ sender: Any) {
-        promptForVersionName(reprompt: false)
+    func getFavoriteImage(withValue val: Bool) -> UIImage {
+        return val ? #imageLiteral(resourceName: "heart-filled-50") : #imageLiteral(resourceName: "heart-outline-50")
     }
     
     
-    func promptForVersionName(reprompt isReprompt: Bool) {
-        let alert = UIAlertController(title: "New Version", message: "What is the name of the recipe version?", preferredStyle: .alert)
+    
+    
+    
+    
+    
+    /**
+     *
+     *
+     * MARK: Add, Update, Delete, Load Version functions
+     *
+     */
+    
+    @IBAction func addVersionButtonPressed(_ sender: Any) {
+        promptForVersionName(withTitle: "New Version", msg: "What is the name of your new version?", indexPath: nil, reprompt: false)
+    }
+
+    func promptForVersionName(withTitle title: String, msg: String, indexPath: IndexPath?, reprompt isReprompt: Bool) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         if isReprompt { alert.title? = "Please enter a unique version name" }
         
-        alert.addTextField { (textField) in
-            textField.text = "Version \(self.allVersions.count + 1)"
-        }
-        
+        alert.addTextField()
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
             var versionNameExists = false
@@ -100,14 +137,52 @@ class RecipeVersionsViewController: UITableViewController {
             }
             
             if versionNameExists {
-                self.promptForVersionName(reprompt: true)
+                //remprompt if name exists
+                self.promptForVersionName(withTitle: title, msg: msg, indexPath: indexPath, reprompt: true)
+            } else if let path = indexPath{
+                //rename version and update
+                self.updateVersion(atIndexPath: path, newName: textField.text ?? "")
             } else {
+                //save new version
                 self.saveNewVersion(withVersionName: textField.text! as String)
             }
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateVersion(atIndexPath indexPath: IndexPath, newName: String){
+        let spinner = createActivityIndicator()
+        let dataStore = self.backendless.data.ofTable("Recipe")
+        var updatedVersion = allVersions[indexPath.row]
+        updatedVersion["version_name"] = newName
+        dataStore?.save(updatedVersion,
+                        response: { record in
+                            spinner.removeFromSuperview()
+                            self.loadVersions()
+                        }, error: { fault in
+                            spinner.removeFromSuperview()
+                            self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown error")
+        })
+    }
+    
+    func deleteVersion(atIndexPath indexPath: IndexPath) {
+        let cell = self.versionsTable.cellForRow(at: indexPath) as! RecipeVersionCell
+        let versionName = cell.nameLabel.text ?? ""
+        let alert = UIAlertController(title: "Delete \(versionName)?", message: "This action cannot be undone", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            let versionId = self.allVersions[indexPath.row]["objectId"] as? String ?? ""
+            self.backendless.data.ofTable("Recipe").remove(byId: versionId,
+                response: { num in
+                    self.loadVersions()
+                }, error: { fault in
+                    self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown Error")
+            })
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -124,14 +199,12 @@ class RecipeVersionsViewController: UITableViewController {
         dataStore!.save(recipe,
                         response: {
                             (recipe) -> () in
-                            print("New version created")
                             self.loadVersions()
-                            self.versionsTable.reloadData()
-                            //segue to new version
+                            self.versionsTable.reloadData() //TODO: Redundant?
         },
                         error: {
                             (fault : Fault?) -> () in
-                            print("Server error: \(fault ?? Fault())")
+                            self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown Error")
                             
         })
     }
@@ -161,10 +234,12 @@ class RecipeVersionsViewController: UITableViewController {
         })
     }
     
-    func getFavoriteImage(withValue val: Bool) -> UIImage {
-        return val ? #imageLiteral(resourceName: "heart-filled-50") : #imageLiteral(resourceName: "heart-outline-50")
-    }
     
+    
+    
+    
+    
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipeDetails" {
             let recipeDetailsVC = segue.destination as? RecipeDetailsViewController

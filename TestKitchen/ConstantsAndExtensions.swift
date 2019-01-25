@@ -26,5 +26,6 @@ extension UIViewController {
 }
 
 struct Constants {
-    static let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"] 
+    static let courseNames = ["Mains", "Sides", "Appetizers", "Bakery", "Desserts", "Other"]
+    static let userID = Backendless.sharedInstance().userService.currentUser.email as String
 }
