@@ -33,6 +33,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
 
         ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
+        print(ingredients.count)
         imagePath = recipe["image_path"] as? String
         notes = recipe["notes"] as? String ?? ""
         if let path = imagePath {
@@ -161,6 +162,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     @objc func saveRecipe() {
         //make save button disabled
         let dataStore = self.backendless?.data.ofTable("Recipe")
+        print("ingredients size: \(ingredients.count)")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         recipe["notes"] = notes
@@ -175,8 +177,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         },
                         error: {
                             (fault : Fault?) -> () in
-                            print("Server reported an error: \(String(describing: fault))")
-                            //make alert of error
+                            print("Server erro: \(String(describing: fault))")
+                            self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown Error")
         })
         
     }
@@ -303,7 +305,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
      *  allow for swipe keyboard dismiss
      */
     func setupUI() {
-        //for dynamic row heights
         recipeTable.estimatedRowHeight = 45
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
