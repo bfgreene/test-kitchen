@@ -30,10 +30,11 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
         directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
         print(ingredients.count)
+        print("ingredients in viewDidLoad: \(recipe["ingredient_list"] ?? "none")")
         imagePath = recipe["image_path"] as? String
         notes = recipe["notes"] as? String ?? ""
         if let path = imagePath {
@@ -162,8 +163,9 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     @objc func saveRecipe() {
         //make save button disabled
         let dataStore = self.backendless?.data.ofTable("Recipe")
-        print("ingredients size: \(ingredients.count)")
+        print("ingredients size in saveRecipe(): \(ingredients.count)")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
+        print(recipe["ingredients_list"] ?? "None")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         recipe["notes"] = notes
         recipe["image_path"] = imagePath
