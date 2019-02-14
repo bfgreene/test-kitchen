@@ -793,7 +793,7 @@
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="TestKitchen-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-es-yhB">
                                         <rect key="frame" x="104" y="81" width="207" height="207"/>
-                                        <color key="backgroundColor" red="0.96470588235294119" green="0.60784313725490191" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MdC-es-yhB" secondAttribute="height" multiplier="1:1" id="zHz-ik-82Z"/>
                                         </constraints>

@@ -31,16 +31,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
-        directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
-        print(ingredients.count)
-        print("ingredients in viewDidLoad: \(recipe["ingredient_list"] ?? "none")")
-        imagePath = recipe["image_path"] as? String
-        notes = recipe["notes"] as? String ?? ""
-        if let path = imagePath {
-            getImage(withURL: path)
-        }
-       
+        initializeData()
         updateReferenceIndicies()
         setupUI()
     }
@@ -163,9 +154,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     @objc func saveRecipe() {
         //make save button disabled
         let dataStore = self.backendless?.data.ofTable("Recipe")
-        print("ingredients size in saveRecipe(): \(ingredients.count)")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
-        print(recipe["ingredients_list"] ?? "None")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         recipe["notes"] = notes
         recipe["image_path"] = imagePath
@@ -173,13 +162,10 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         dataStore?.save(recipe,
                         response: {
                             (updatedRecipe) -> () in
-                            print("Recipe saved")
-                            //make "success" popup flash
-                            //set flag for versions to reload.. or send it back on unwind
+                            //TODO: make "success" popup flash
         },
                         error: {
                             (fault : Fault?) -> () in
-                            print("Server erro: \(String(describing: fault))")
                             self.alert(withTitle: "Server Error", msg: fault?.message ?? "Unknown Error")
         })
         
@@ -256,30 +242,34 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             dishImage = chosenImage
             saveImage(img: chosenImage)
-            DispatchQueue.main.async {
-                self.recipeTable.reloadData()
-            }
         }
         picker.dismiss(animated: true, completion: nil)
     }
     
     
     func saveImage(img: UIImage) {
+        if let imageCell = recipeTable.cellForRow(at: IndexPath(row: 1, section: 0)) as? ImageCell {
+            imageCell.backgroundAddButton.isHidden = true
+            imageCell.addPhotoButton.isHidden = true
+            imageCell.spinner.startAnimating()
+        }
         let imgFile = UIImageJPEGRepresentation(img, 1)
-        let filePath = "images/img_\(Date().timeIntervalSince1970).jpg" //maybe add username in here
-       
+        let filePath = "images/img_\(Date().timeIntervalSince1970).jpg" //TODO: add username in here incase two users add image same second
         backendless?.file.saveFile(filePath, content: imgFile, response: { (file: BackendlessFile?) in
             self.imagePath = file?.fileURL
+            DispatchQueue.main.async {
+                self.recipeTable.reloadData()
+            }
             self.saveRecipe()
         }, error: { (fault: Fault?) in
-            //failedupload
-            print("upload failed")
+            self.alert(withTitle: "Error", msg: fault?.message ?? "Image failed to save.")
         })
     }
     
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    func getImage(withURL url: String) {
+        if let fileURL = URL(string: url) {
+            downloadImage(from: fileURL)
+        }
     }
     
     func downloadImage(from url: URL) {
@@ -293,11 +283,12 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         }
     }
     
-    func getImage(withURL url: String) {
-        if let fileURL = URL(string: url) {
-            downloadImage(from: fileURL)
-        }
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    
+    
+    
     
     
     /*
@@ -382,6 +373,18 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         return String(text[substringIndex...])
     }
     
+    func initializeData() {
+        ingredients = (recipe["ingredient_list"] as? String)?.components(separatedBy: ",") ?? []
+        if ingredients.count==1, ingredients[0].count == 0 {ingredients = []}
+        directions = (recipe["direction_list"] as? String)?.components(separatedBy: ",") ?? []
+        if directions.count == 1, directions[0].count == 0 {directions = []}
+        imagePath = recipe["image_path"] as? String
+        notes = recipe["notes"] as? String ?? ""
+        if let path = imagePath {
+            getImage(withURL: path)
+        }
+    }
+    
     func updateReferenceIndicies() {
         firstIngredientIndex = 3
         directionsHeaderIndex = 4 + ingredients.count
@@ -403,7 +406,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
             }
         }
     }
- 
+
 
 }
 
