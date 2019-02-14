@@ -56,7 +56,11 @@ class RecipeVersionsViewController: UITableViewController {
         rename.backgroundColor = UIColor(red: 0.725, green: 0.725, blue: 0.725, alpha: 1) //light grey
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
-            self.deleteVersion(atIndexPath: indexPath)
+            if self.allVersions.count == 1 {
+                self.alert(withTitle: "Cannot Delete", msg: "There must be at least one version for each recipe")
+            } else {
+                self.deleteVersion(atIndexPath: indexPath)
+            }
         }
         delete.backgroundColor = UIColor(red: 1, green: 0.439, blue: 0.439, alpha: 1) //pale red
         
@@ -70,6 +74,8 @@ class RecipeVersionsViewController: UITableViewController {
     
 
     /**
+     *  MARK: Favorite Button Functionality
+     *
      *  Changes the 'is_favorite' property of recipe and saves to database
      *  Displays proper favorite image
      */
@@ -188,8 +194,7 @@ class RecipeVersionsViewController: UITableViewController {
     
     
     func saveNewVersion(withVersionName versionName: String) {
-        //TODO: make option to make new version based off specific existing version? come up with way to not use indexing in case all versions deleted
-        //^^ could do this with button in the recipe details of one they want to base off of
+        //TODO: make option to make new version based off specific existing version? come up with way to not use indexing in case all versions deleted... could do this with button in the recipe details of one they want to base off of
         let recipe = ["course": self.allVersions[0]["course"],
                       "dish_name" : self.allVersions[0]["dish_name"],
                       "user_id" : self.allVersions[0]["user_id"],

@@ -221,30 +221,26 @@
                                     <constraint firstAttribute="width" constant="275" id="Ygr-8h-mQ9"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGA-AV-GMJ">
-                                <rect key="frame" x="15" y="35" width="42" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGA-AV-GMJ">
+                                <rect key="frame" x="354" y="35" width="40" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="4aZ-7U-ZHf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="40"/>
-                                <state key="normal" title="x ⓧ">
+                                <state key="normal" title="ⓧ">
                                     <color key="titleColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="dismiss:" destination="9iT-jV-dcV" eventType="touchUpInside" id="gHT-5h-019"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCW-CL-mrr">
-                                <rect key="frame" x="55" y="49" width="51" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="ⓧ">
-                                    <color key="titleColor" red="1" green="0.61091428999999997" blue="0.57130318879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JbS-oW-fjJ" firstAttribute="centerX" secondItem="RSN-0Z-gXP" secondAttribute="centerX" id="4BI-Lb-tSL"/>
+                            <constraint firstItem="RSN-0Z-gXP" firstAttribute="trailing" secondItem="tGA-AV-GMJ" secondAttribute="trailing" constant="20" id="D1o-qY-tAS"/>
                             <constraint firstItem="JbS-oW-fjJ" firstAttribute="top" secondItem="Wa6-t6-Nns" secondAttribute="bottom" constant="10" id="M2w-ar-7f0"/>
+                            <constraint firstItem="tGA-AV-GMJ" firstAttribute="top" secondItem="RSN-0Z-gXP" secondAttribute="top" constant="15" id="NGP-ge-ht4"/>
                             <constraint firstItem="Wa6-t6-Nns" firstAttribute="centerX" secondItem="RSN-0Z-gXP" secondAttribute="centerX" id="jec-vJ-m3p"/>
                             <constraint firstItem="Wa6-t6-Nns" firstAttribute="centerY" secondItem="RSN-0Z-gXP" secondAttribute="centerY" id="qJG-PR-dJm"/>
                         </constraints>
@@ -797,12 +793,13 @@
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="TestKitchen-Logo-1024" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-es-yhB">
                                         <rect key="frame" x="104" y="81" width="207" height="207"/>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.60784313725490191" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MdC-es-yhB" secondAttribute="height" multiplier="1:1" id="zHz-ik-82Z"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.8901960784313725" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="MdC-es-yhB" firstAttribute="centerY" secondItem="Evi-sx-Ght" secondAttribute="centerY" id="90h-aj-X1T"/>
                                     <constraint firstItem="MdC-es-yhB" firstAttribute="centerX" secondItem="Evi-sx-Ght" secondAttribute="centerX" id="jKN-ce-PF0"/>
@@ -886,7 +883,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.88910553960000005" blue="0.76518019650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.8901960784313725" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="oGj-9L-tkp" firstAttribute="centerX" secondItem="lK8-Y8-FvB" secondAttribute="centerX" id="95p-mT-wAU"/>
                                     <constraint firstItem="oGj-9L-tkp" firstAttribute="centerY" secondItem="lK8-Y8-FvB" secondAttribute="centerY" id="iPb-rw-kgT"/>
