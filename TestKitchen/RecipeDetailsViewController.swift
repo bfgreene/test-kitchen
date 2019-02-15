@@ -10,7 +10,7 @@ import UIKit
 
 class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, recipeUpdator {
 
-    let backendless = Backendless.sharedInstance()
+    let backendless = Backendless.sharedInstance() as Backendless
     var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
     var recipe = [String : Any]()
     var ingredients = [String]()
@@ -153,7 +153,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     
     @objc func saveRecipe() {
         //make save button disabled
-        let dataStore = self.backendless?.data.ofTable("Recipe")
+        let dataStore = self.backendless.data.ofTable("Recipe")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
         recipe["notes"] = notes
@@ -255,7 +255,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         }
         let imgFile = UIImageJPEGRepresentation(img, 1)
         let filePath = "images/img_\(Date().timeIntervalSince1970).jpg" //TODO: add username in here incase two users add image same second
-        backendless?.file.saveFile(filePath, content: imgFile, response: { (file: BackendlessFile?) in
+        backendless.file.saveFile(filePath, content: imgFile, response: { (file: BackendlessFile?) in
             self.imagePath = file?.fileURL
             DispatchQueue.main.async {
                 self.recipeTable.reloadData()
@@ -300,10 +300,12 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     func setupUI() {
         recipeTable.estimatedRowHeight = 45
         
+        /** testing no save button
         let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
         saveButton.isEnabled = true
         self.navigationItem.rightBarButtonItem = saveButton
-        
+        */
+        recipeTable.tableFooterView = UIView()
         recipeTable.keyboardDismissMode = .onDrag
     }
     
@@ -394,6 +396,13 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         addDirectionIndex = notesHeaderIndex - 1
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParentViewController {
+            saveRecipe()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToEditor" {
             if let editingVC = segue.destination as? EditingViewController {
@@ -406,8 +415,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
             }
         }
     }
-
-
 }
 
 protocol recipeUpdator {
