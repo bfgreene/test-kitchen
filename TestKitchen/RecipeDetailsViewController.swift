@@ -11,7 +11,7 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, recipeUpdator {
 
     let backendless = Backendless.sharedInstance() as Backendless
-    var recipeID = String() //use this or send entire recipe? consider what happends when updating/adding new versions
+    var recipeID = String()
     var recipe = [String : Any]()
     var ingredients = [String]()
     var directions = [String]()
@@ -19,7 +19,9 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     var dishImage: UIImage?
     var imagePath: String?
     var directionsHeaderIndex, notesHeaderIndex, addIngredientIndex, addDirectionIndex, firstIngredientIndex, firstDirectionIndex : Int!
- 
+    var rowsInTable: Int {
+        return ingredients.count + directions.count + 8
+    }
     @IBOutlet var recipeTable: UITableView!
     
     
@@ -42,7 +44,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingredients.count + directions.count + 8 //Title,Picture,Headers(3),Notes,addCells(2)
+        return rowsInTable
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -54,6 +56,8 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         case 1:
             let width = tableView.frame.width
             height = imagePath != nil ? width : 150
+        case rowsInTable-1:
+            height = notes == "" ? 40 : UITableViewAutomaticDimension
         default:
             height = UITableViewAutomaticDimension
         }
@@ -92,7 +96,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
                 cell.spinner.startAnimating()
                 if let img = dishImage {
                     cell.backgroundImageView.image = img
-                    //cell.contentView.sendSubview(toBack: cell.backgroundImageView)
                     cell.photoSettingsButton.clipsToBounds = true
                     cell.photoSettingsButton.layer.cornerRadius = 5
                 }
@@ -131,7 +134,7 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
             
         } else if indexPath.row == addDirectionIndex {
             let cell = tableView.dequeueReusableCell(withIdentifier: "addItemCell", for: indexPath) as! AddItemCell
-            cell.addButton.tag = 1 //directions tag TODO:make constants struct here and for tag above
+            cell.addButton.tag = 1
             cell.textField.text = ""
             return cell
             
@@ -152,7 +155,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
 
     
     @objc func saveRecipe() {
-        //make save button disabled
         let dataStore = self.backendless.data.ofTable("Recipe")
         recipe["ingredient_list"] = ingredients.map{$0}.joined(separator: ",")
         recipe["direction_list"] = directions.map{$0}.joined(separator: ",")
@@ -162,7 +164,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
         dataStore?.save(recipe,
                         response: {
                             (updatedRecipe) -> () in
-                            //TODO: make "success" popup flash
         },
                         error: {
                             (fault : Fault?) -> () in
@@ -294,17 +295,10 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
     /*
      *  General additional UI setup:
      *  allow for dynamic row heights
-     *  add save button programatically
      *  allow for swipe keyboard dismiss
      */
     func setupUI() {
         recipeTable.estimatedRowHeight = 45
-        
-        /** testing no save button
-        let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(saveRecipe))
-        saveButton.isEnabled = true
-        self.navigationItem.rightBarButtonItem = saveButton
-        */
         recipeTable.tableFooterView = UIView()
         recipeTable.keyboardDismissMode = .onDrag
     }
@@ -327,7 +321,6 @@ class RecipeDetailsViewController: UITableViewController, UITextViewDelegate, UI
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // TODO: Make constants for indexes
             // TODO: update numbers of directions if direction deleted
             if indexPath.row < ingredients.count + 3 {
                 ingredients.remove(at: (indexPath.row-3))

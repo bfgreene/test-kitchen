@@ -80,7 +80,6 @@ class RecipeVersionsViewController: UITableViewController {
      *  Displays proper favorite image
      */
     @IBAction func favoriteButtonPressed(_ sender: Any) {
-        //TODO: change ui constaints so title doesn't overlap heart button
         if let selectedButton = sender as? UIButton {
             let indexPath = IndexPath(row: selectedButton.tag, section: 0)
             let dataStore = backendless.data.ofTable("Recipe")

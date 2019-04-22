@@ -604,14 +604,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ingredients / Directions / Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkj-8l-drQ">
-                                            <rect key="frame" x="13" y="0.0" width="308" height="45"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients / Directions / Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkj-8l-drQ">
+                                            <rect key="frame" x="13" y="0.0" width="388" height="44.666666666666664"/>
                                             <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Kkj-8l-drQ" secondAttribute="trailing" constant="13" id="3Hl-7f-6qp"/>
+                                        <constraint firstItem="Kkj-8l-drQ" firstAttribute="top" secondItem="tIG-pr-G92" secondAttribute="top" id="EnV-AD-pfO"/>
+                                        <constraint firstAttribute="bottom" secondItem="Kkj-8l-drQ" secondAttribute="bottom" id="Uxn-Wv-hKP"/>
+                                        <constraint firstItem="Kkj-8l-drQ" firstAttribute="leading" secondItem="tIG-pr-G92" secondAttribute="leading" constant="13" id="ZGV-O3-mAA"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.3429679274559021" green="0.61764049530029297" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -652,14 +657,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhc-y7-SwP">
-                                            <rect key="frame" x="16" y="0.0" width="325" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhc-y7-SwP">
+                                            <rect key="frame" x="16" y="10.000000000000002" width="344" height="23.666666666666671"/>
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Zhc-y7-SwP" secondAttribute="bottom" constant="10" id="1l8-1F-tqs"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zhc-y7-SwP" secondAttribute="trailing" constant="16" id="BtB-4I-vIl"/>
+                                        <constraint firstItem="Zhc-y7-SwP" firstAttribute="top" secondItem="5R7-Cu-zMJ" secondAttribute="top" constant="10" id="hls-4A-Pig"/>
+                                        <constraint firstItem="Zhc-y7-SwP" firstAttribute="leading" secondItem="5R7-Cu-zMJ" secondAttribute="leading" constant="16" id="uu4-hV-1mH"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contentLabel" destination="Zhc-y7-SwP" id="gnQ-mQ-mj9"/>
@@ -1004,9 +1014,9 @@
     </scenes>
     <resources>
         <image name="TestKitchen-Logo-1024" width="1024" height="1024"/>
-        <image name="heart-filled-50" width="50" height="50"/>
-        <image name="icons8-pencil-50" width="50" height="50"/>
-        <image name="icons8-settings-40" width="40" height="40"/>
+        <image name="heart-filled-50" width="180" height="180"/>
+        <image name="icons8-pencil-50" width="180" height="180"/>
+        <image name="icons8-settings-40" width="180" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Sa7-tP-W6B"/>
